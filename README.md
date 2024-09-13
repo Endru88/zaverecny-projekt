@@ -13,15 +13,10 @@
 
 ## ZDROJE:
   - Implementace modelů z mého předchozího projektu IT3 (https://github.com/Endru88/healthsync)
-<<<<<<< HEAD
   - https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn
   - https://docs.strapi.io/user-docs/intro
   -https://nextjs.org/docs
-=======
-  - [https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn](https://www.youtube.com/watch?v=rvo-L0cP5NA&list=PL7Q0DQYATmvgONvIWsy34aDkAtcdjsQLE)
-  - 
-  -
->>>>>>> 1ce83333bbd4a9e0fb4bdb244487692cb3c67310
+
 
 ## HARMONOGRAM:
 
