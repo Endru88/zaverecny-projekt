@@ -3,6 +3,7 @@
 ## REZERVAČNÍ SYSTÉM HEALTHSYNC
 
 ### JAZYK:
+  - JavaScript,Typescript, CSS
 ### CÍLE:
   - vytvořit rezervační systém s možností rezervací treninků pro naše fitko, intuitivní jednoduchý a dobřeorientovatelný design, možnost dobití prostředků na účet, login k vlastnímu účtu, OAuht, možnost pro zaměstnance nahlížet do jednotlivých seznamů a správu večkerých klientů. Podstata je kladena na  usnadnění práce zaměstnancům a postupně tuto část začít využívat v provozu.
   - naučit se nové technologie
