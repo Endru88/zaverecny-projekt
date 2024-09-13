@@ -1,0 +1,106 @@
+/* Navbar Container */
+.navbar {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2a6355;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  /* Menu items */
+  .menu {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .menu a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333333;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .menu a:hover {
+    color: #2a6355;
+  }
+  
+  /* Call to Action Button */
+  .cta {
+    background-color: #2a6355;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta:hover {
+    background-color: #1d463e;
+  }
+  
+  /* Mobile hamburger menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  
+  .hamburger div {
+    width: 25px;
+    height: 2px;
+    background-color: #333333;
+  }
+  
+  @media (max-width: 768px) {
+    /* Hide desktop menu and show hamburger */
+    .menu {
+      display: none;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  }
+  
+  /* Mobile menu when open */
+  .menu.mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .menu.mobile a {
+    color: #333333;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .menu.mobile a:hover {
+    color: #2a6355;
+  }
+  
