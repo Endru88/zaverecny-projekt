@@ -13,7 +13,7 @@
 
 ## ZDROJE:
   - Implementace modelů z mého předchozího projektu IT3 (https://github.com/Endru88/healthsync)
-  - https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn
+  - [https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn](https://www.youtube.com/watch?v=rvo-L0cP5NA&list=PL7Q0DQYATmvgONvIWsy34aDkAtcdjsQLE)
   - 
   -
 
