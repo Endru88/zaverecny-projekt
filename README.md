@@ -3,6 +3,7 @@
 ## REZERVAČNÍ SYSTÉM HEALTHSYNC
 
 ### JAZYK:
+  - JavaScript,Typescript, CSS
 ### CÍLE:
   - vytvořit rezervační systém s možností rezervací treninků pro naše fitko, intuitivní jednoduchý a dobřeorientovatelný design, možnost dobití prostředků na účet, login k vlastnímu účtu, OAuht, možnost pro zaměstnance nahlížet do jednotlivých seznamů a správu večkerých klientů. Podstata je kladena na  usnadnění práce zaměstnancům a postupně tuto část začít využívat v provozu.
   - naučit se nové technologie
@@ -12,9 +13,15 @@
 
 ## ZDROJE:
   - Implementace modelů z mého předchozího projektu IT3 (https://github.com/Endru88/healthsync)
+<<<<<<< HEAD
   - https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn
   - https://docs.strapi.io/user-docs/intro
   -https://nextjs.org/docs
+=======
+  - [https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn](https://www.youtube.com/watch?v=rvo-L0cP5NA&list=PL7Q0DQYATmvgONvIWsy34aDkAtcdjsQLE)
+  - 
+  -
+>>>>>>> 1ce83333bbd4a9e0fb4bdb244487692cb3c67310
 
 ## HARMONOGRAM:
 
