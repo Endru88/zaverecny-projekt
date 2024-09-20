@@ -80,17 +80,20 @@
       },
       "type": "blocks"
     },
-    "photo": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": true,
+    "status": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Club member",
+        "Client",
+        "Permament"
+      ],
+      "required": true,
+      "default": "Client"
     }
   }
 }

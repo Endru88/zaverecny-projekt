@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "lessons",
+  "collectionName": "trainers",
   "info": {
-    "singularName": "lesson",
-    "pluralName": "lessons",
-    "displayName": "Lesson",
+    "singularName": "trainer",
+    "pluralName": "trainers",
+    "displayName": "trainer",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Name": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,33 +25,41 @@
       "type": "string",
       "required": true
     },
-    "room": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::room.room"
-    },
-    "Start": {
+    "surname": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "datetime",
+      "type": "string",
       "required": true
     },
-    "End": {
+    "telephone": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "datetime",
+      "type": "string",
+      "regex": "^[+]\\d{3}( \\d{3}){3}$",
       "required": true
     },
-    "trainer": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::trainer.trainer"
+    "email": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "email",
+      "required": true
+    },
+    "info": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "blocks"
     }
   }
 }

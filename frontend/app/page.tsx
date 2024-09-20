@@ -109,6 +109,7 @@ const HomePage = () => {
               <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
               <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
               <p><strong>Description:</strong> {selectedLesson.attributes.Description || 'No description available.'}</p>
+              <p><strong>Trainer:</strong> {selectedLesson.attributes.TrainerName}</p>
             </div>
           </div>
         )}

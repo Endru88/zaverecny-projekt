@@ -817,11 +817,6 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'oneToOne',
       'api::room.room'
     >;
-    users_permissions_user: Attribute.Relation<
-      'api::lesson.lesson',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     Start: Attribute.DateTime &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -836,6 +831,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    trainer: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'api::trainer.trainer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -925,12 +925,14 @@ export interface ApiPersonPerson extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    photo: Attribute.Media<'images', true> &
+    status: Attribute.Enumeration<['Club member', 'Client', 'Permament']> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }>;
+      }> &
+      Attribute.DefaultTo<'Client'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -961,6 +963,7 @@ export interface ApiReservationReservation extends Schema.CollectionType {
     singularName: 'reservation';
     pluralName: 'reservations';
     displayName: 'Reservation';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -971,15 +974,15 @@ export interface ApiReservationReservation extends Schema.CollectionType {
     };
   };
   attributes: {
+    person: Attribute.Relation<
+      'api::reservation.reservation',
+      'oneToOne',
+      'api::person.person'
+    >;
     lesson: Attribute.Relation<
       'api::reservation.reservation',
       'oneToOne',
       'api::lesson.lesson'
-    >;
-    users_permissions_user: Attribute.Relation<
-      'api::reservation.reservation',
-      'oneToOne',
-      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1036,6 +1039,81 @@ export interface ApiRoomRoom extends Schema.CollectionType {
   };
 }
 
+export interface ApiTrainerTrainer extends Schema.CollectionType {
+  collectionName: 'trainers';
+  info: {
+    singularName: 'trainer';
+    pluralName: 'trainers';
+    displayName: 'trainer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    surname: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    telephone: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    email: Attribute.Email &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    info: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::trainer.trainer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::trainer.trainer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::trainer.trainer',
+      'oneToMany',
+      'api::trainer.trainer'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1058,6 +1136,7 @@ declare module '@strapi/types' {
       'api::person.person': ApiPersonPerson;
       'api::reservation.reservation': ApiReservationReservation;
       'api::room.room': ApiRoomRoom;
+      'api::trainer.trainer': ApiTrainerTrainer;
     }
   }
 }

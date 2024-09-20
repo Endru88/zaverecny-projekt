@@ -26,7 +26,8 @@
   - průzkum jazyků a technologii                            7.9.     3h
   - setup backendu(Strapi)  + trobleshooting                11.9.    2h
   - založení github projektu                                12.9.
-  -setup frontendu(Next.js), první testování zobrazení api  13.9.    1h
+  - setup frontendu(Next.js), první testování zobrazení api  13.9.    1h
+  - frontend- calender, basic styling, models  20.9.    4h
 
 ### ŘÍJEN:
   - 
