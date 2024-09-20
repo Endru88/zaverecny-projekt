@@ -1,0 +1,129 @@
+/* page.module.css */
+.container {
+    flex: 1;
+    padding: 20px;
+    min-height: 20vh; /* Ensure it takes full height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content */
+    background-color: #0dff05;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Dark gray for headings */
+    font-size: 2.5rem; /* Larger heading */
+    font-weight: 600; /* Bold heading */
+    transition: color 0.3s; /* Transition for hover effect */
+  }
+  
+  .heading:hover {
+    color: #555; /* Slightly darker gray on hover */
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: auto repeat(7, 1fr);
+    grid-template-rows: repeat(16, 60px); /* Increased height for better visibility */
+    gap: 1px; /* Gap between cells */
+    background-color: #e0e0e0; /* Gray background for the calendar */
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  .header {
+    display: contents;
+  }
+  
+  .dayCell {
+    font-weight: bold;
+    text-align: center;
+    background-color: #00796b; /* Teal for day headers */
+    color: #ffffff; /* White text for contrast */
+    padding: 10px;
+    border: 1px solid #004d40; /* Darker teal border */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .timeRow {
+    display: contents;
+  }
+  
+  .timeCell {
+    text-align: right;
+    padding-right: 10px;
+    background-color: #80cbc4; /* Lighter teal */
+    color: #004d40; /* Darker text for contrast */
+    border: 1px solid #004d40; /* Darker border */
+  }
+  
+  .lessonCell {
+    border: 1px solid #004d40; /* Darker border */
+    position: relative; /* Required for absolute positioning of lessons */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .hasLesson {
+    background-color: #ffccbc; /* Soft peach for lessons */
+  }
+  
+  .lessonContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9c27a; /* Darker peach on hover */
+    color: #333; /* Dark text for better contrast */
+    font-weight: bold; /* Bold text for lessons */
+    padding: 5px;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition on hover */
+  }
+  
+  .lessonContent:hover {
+    background-color: #ffab40; /* Darker peach on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  .modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  }
+  
+  .modalContent {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.3s; /* Transition for modal */
+    transform: translateY(-10px); /* Initial slight lift */
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
