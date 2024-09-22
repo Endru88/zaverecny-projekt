@@ -1,0 +1,71 @@
+.container {
+    flex: 1;
+    padding: 20px;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0dff05;
+    border-radius: 10px;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  
+  .details {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+    color:#333;
+  }
+  
+  .name {
+    color: #00796b;
+    margin-bottom: 15px;
+  }
+  
+  .infoSection {
+    margin-bottom: 20px;
+  }
+  
+  .infoList {
+    margin-top: 15px;
+    border-top: 2px solid #00796b;
+    padding-top: 10px;
+  }
+  
+  .infoText {
+    margin: 5px 0;
+    color: #555; /* Darker gray for the info text */
+  }
+  
+  .editButton {
+    padding: 10px 15px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .editButton:hover {
+    background-color: #005b52;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  

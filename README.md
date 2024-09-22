@@ -28,6 +28,7 @@
   - založení github projektu                                12.9.
   - setup frontendu(Next.js), první testování zobrazení api  13.9.    1h
   - frontend- calender, basic styling, models  20.9.    4h
+  - frontend- people list, detail, edit, basic styling       22.9      2h
 
 ### ŘÍJEN:
   - 

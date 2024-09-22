@@ -17,7 +17,7 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className={`${styles.menu} ${mobileMenuOpen ? styles.mobile : ''}`}>
-        <a href="#about">Lessons</a>
+        <a href="/team">Our Team</a>
         <a href="#team" className={styles.cta}>Login/Register</a>
       </div>
 

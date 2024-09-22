@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import Navbar from './templates/navbar/navbar';  // Reuse Navbar component
@@ -66,21 +65,39 @@ const Calendar = ({ lessons, onLessonClick }) => {
 
 const HomePage = () => {
   const [lessons, setLessons] = useState([]);
+  const [reservations, setReservations] = useState({});
   const [selectedLesson, setSelectedLesson] = useState(null); // State for the selected lesson
 
   useEffect(() => {
-    const fetchLessons = async () => {
+    const fetchLessonsAndReservations = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons`);
-        const data = await response.json();
-        setLessons(data.data || []); // Ensure it's an array
+        // Fetch lessons with trainer and room data
+        const lessonResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons?populate=trainer&populate=room`);
+        const lessonData = await lessonResponse.json();
+        const lessons = lessonData.data || [];
+
+        // Fetch reservations
+        const reservationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reservations?populate=lesson`);
+        const reservationData = await reservationResponse.json();
+        const reservations = reservationData.data || [];
+
+        // Count how many people joined each lesson
+        const reservationCounts = {};
+        reservations.forEach((reservation) => {
+          const lessonId = reservation.attributes.lesson.data.id;
+          reservationCounts[lessonId] = (reservationCounts[lessonId] || 0) + 1;
+        });
+
+        setLessons(lessons);
+        setReservations(reservationCounts);
       } catch (error) {
-        console.error('Error fetching lessons:', error);
-        setLessons([]); // Fallback to empty array on error
+        console.error('Error fetching data:', error);
+        setLessons([]);
+        setReservations({});
       }
     };
 
-    fetchLessons();
+    fetchLessonsAndReservations();
   }, []);
 
   const handleLessonClick = (lesson) => {
@@ -95,10 +112,8 @@ const HomePage = () => {
     <div>
       <Navbar />
       <div className={styles.container}>
-
         <h1 className={styles.heading}>Weekly Schedule</h1>
         <Calendar lessons={lessons} onLessonClick={handleLessonClick} />
-
 
         {/* Modal for lesson details */}
         {selectedLesson && (
@@ -109,7 +124,22 @@ const HomePage = () => {
               <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
               <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
               <p><strong>Description:</strong> {selectedLesson.attributes.Description || 'No description available.'}</p>
-              <p><strong>Trainer:</strong> {selectedLesson.attributes.TrainerName}</p>
+
+              {/* Trainer Information */}
+              <p><strong>Trainer:</strong> {selectedLesson.attributes.trainer.data.attributes.name} {selectedLesson.attributes.trainer.data.attributes.surname}</p>
+
+              {/* Room Information */}
+              {selectedLesson.attributes.room.data ? (
+                <>
+                  <p><strong>Room:</strong> {selectedLesson.attributes.room.data.attributes.Name}</p>
+                  <p><strong>Room Capacity:</strong> {selectedLesson.attributes.room.data.attributes.Capacity}</p>
+                </>
+              ) : (
+                <p><strong>Room:</strong> Not assigned</p>
+              )}
+
+              {/* Joined People */}
+              <p><strong>Joined:</strong> {reservations[selectedLesson.id] || 0} / {selectedLesson.attributes.room.data ? selectedLesson.attributes.room.data.attributes.Capacity : 'N/A'}</p>
             </div>
           </div>
         )}
