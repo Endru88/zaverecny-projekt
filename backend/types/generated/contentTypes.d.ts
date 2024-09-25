@@ -933,6 +933,11 @@ export interface ApiPersonPerson extends Schema.CollectionType {
         };
       }> &
       Attribute.DefaultTo<'Client'>;
+    users_permissions_user: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

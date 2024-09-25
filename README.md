@@ -15,7 +15,7 @@
   - Implementace modelů z mého předchozího projektu IT3 (https://github.com/Endru88/healthsync)
   - https://www.youtube.com/watch?v=4Ntd414raYc&list=PL4cUxeGkcC9h6OY8_8Oq6JerWqsKdAPxn
   - https://docs.strapi.io/user-docs/intro
-  -https://nextjs.org/docs
+  - https://nextjs.org/docs
 
 
 ## HARMONOGRAM:
@@ -28,7 +28,9 @@
   - založení github projektu                                12.9.
   - setup frontendu(Next.js), první testování zobrazení api  13.9.    1h
   - frontend- calender, basic styling, models  20.9.    4h
-  - frontend- people list, detail, edit, basic styling       22.9      2h
+  - frontend- people list, detail, edit, basic styling       22.9.      2h
+  - frontend- login, register                               25.9.       1h
+  - NEDODĚLÁNO:frontend- user == vytvořit osobu po prvním logu, navázat usera na osobu, profile, úprava profilu
 
 ### ŘÍJEN:
   - 

@@ -1,12 +1,12 @@
 /* page.module.css */
 .container {
-    flex: 1;
-    padding: 20px;
-    min-height: 20vh; /* Ensure it takes full height */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the content */
-    background-color: #0dff05;
+  flex: 1;
+  padding: 40px;
+  min-height: 20vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
   }
   
   .heading {
