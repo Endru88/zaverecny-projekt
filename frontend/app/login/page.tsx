@@ -1,4 +1,3 @@
-// Login.tsx
 'use client';
 
 import { useState } from 'react';
@@ -31,8 +30,27 @@ const Login = () => {
       if (res.ok) {
         // Store the JWT token and username
         localStorage.setItem('jwt', data.jwt);
-        localStorage.setItem('userName', data.user.username); // Assuming user object has username
-        router.push('/'); // Redirect to the profile or home page
+        localStorage.setItem('userId', data.user.id); // Assuming user object has an id
+        localStorage.setItem('username', data.user.username);
+      
+
+        // Step 1: Fetch the associated person for the logged-in user
+        const peopleRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/people?filters[users_permissions_user]=${data.user.id}`, {
+          headers: {
+            Authorization: `Bearer ${data.jwt}`,
+          },
+        });
+
+        const peopleData = await peopleRes.json();
+
+        // Step 2: Check if a person profile exists
+        if (peopleData.data && peopleData.data.length > 0) {
+          // User has a person profile, redirect to home page or profile page
+          router.push('/');
+        } else {
+          // No person found, redirect to the profile creation page
+          router.push('/create-person');
+        }
       } else {
         setError(data.error.message);
       }

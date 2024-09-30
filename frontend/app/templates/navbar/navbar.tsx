@@ -11,7 +11,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // Retrieve user's name from local storage if available
-    const storedUserName = localStorage.getItem('userName');
+    const storedUserName = localStorage.getItem('username'); // Make sure to use 'username' here
     if (storedUserName) {
       setUserName(storedUserName);
     }
@@ -20,7 +20,7 @@ const Navbar = () => {
   const handleLogout = () => {
     // Clear user information from local storage
     localStorage.removeItem('jwt'); // Remove JWT token
-    localStorage.removeItem('userName'); // Remove user name
+    localStorage.removeItem('username'); // Remove user name (ensure the key matches what you stored)
     setUserName(null); // Reset user name in state
     // Optionally, redirect to login page
     window.location.href = '/login'; // Redirect to login page

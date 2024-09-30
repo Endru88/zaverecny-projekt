@@ -1,11 +1,11 @@
 .container {
   flex: 1;
-  padding: 20px;
-  min-height: 20vh; /* Ensure it takes full height */
+  padding: 40px;
+  min-height: 20vh; /* Full height */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content */
-  background-color: #0dff05; /* Green background */
+  align-items: center; /* Center horizontally */
+  background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
   
 }
 
@@ -27,7 +27,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 600px; /* Limit the form width */
-  background-color: #ffffff; /* White background for the form */
+  background: rgba(255, 255, 255, 0.356); /* Slightly transparent white */
   padding: 20px;
   border-radius: 10px; /* Rounded corners for the form */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */

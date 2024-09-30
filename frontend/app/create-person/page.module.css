@@ -1,0 +1,114 @@
+/* page.module.css */
+.container {
+    flex: 1;
+    padding: 40px;
+    min-height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white; /* White for headings */
+    font-size: 2.5rem; /* Larger heading */
+    font-weight: 700; /* Bold heading */
+  }
+  
+  .form {
+    background: rgba(255, 255, 255, 0.356); /* Slightly transparent white */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Max width for form */
+  }
+  
+  .field {
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  .label {
+    margin-bottom: 5px;
+    font-weight: 600; /* Bold label */
+    display: block; /* Block for better layout */
+  }
+  
+  .input {
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    transition: border 0.3s; /* Transition for border on focus */
+    color: black;
+  }
+  
+  .input:focus {
+    border-color: #2193b0; /* Blue border on focus */
+    outline: none; /* Remove outline */
+  }
+  
+  .textarea {
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    transition: border 0.3s; /* Transition for border on focus */
+    height: 100px; /* Specific height for textarea */
+    color: black;
+  }
+  
+  .textarea:focus {
+    border-color: #2193b0; /* Blue border on focus */
+    outline: none; /* Remove outline */
+  }
+  
+  .select {
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    color: black;
+  }
+  
+  .button {
+    background-color: #2193b0; /* Blue background */
+    color: white; /* White text */
+    padding: 12px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+    width: 100%; /* Full width button */
+  }
+  
+  .button:hover {
+    background-color: #197a9e; /* Darker blue on hover */
+  }
+  
+  .error {
+    color: red; /* Red for error messages */
+    text-align: center; /* Center error message */
+    margin-bottom: 10px; /* Margin below error */
+  }
+  
+  .registerPrompt {
+    text-align: center; /* Center the prompt */
+  }
+  
+  .link {
+    color: #2193b0; /* Link color */
+    text-decoration: underline; /* Underline link */
+  }
+  
+  .link:hover {
+    text-decoration: none; /* Remove underline on hover */
+  }
+  
