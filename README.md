@@ -30,7 +30,8 @@
   - frontend- calender, basic styling, models  20.9.    4h
   - frontend- people list, detail, edit, basic styling       22.9.      2h
   - frontend- login, register                               25.9.       1h
-  - NEDODĚLÁNO:frontend- user == vytvořit osobu po prvním logu, navázat usera na osobu, profile, úprava profilu
+  - frontend- přidaní usera k person, vytvoření nové pokud neexistuje 30.9 3h
+  - NEDODĚLÁNO:frontend- user == profile, úprava profilu
 
 ### ŘÍJEN:
   - 
