@@ -1,4 +1,3 @@
-// app/create-person/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -14,6 +13,8 @@ const CreatePerson = () => {
   const [postal, setPostal] = useState('');
   const [info, setInfo] = useState(''); // Text info field
   const [status, setStatus] = useState('Client'); // Default status
+  const [dateOfBirth, setDateOfBirth] = useState(''); // New date of birth field
+  const [type, setType] = useState('Adult'); // Default value for type enumeration
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -50,7 +51,9 @@ const CreatePerson = () => {
       ],
       locale: 'cs-CZ',
       status, // Use the status from state
-      users_permissions_user: userId // Set user ID here to link the person with the user
+      dateofbirth: dateOfBirth, // Include the date of birth
+      type, // Include the type from the dropdown
+      users_permissions_user: userId, // Set user ID here to link the person with the user
     };
 
     try {
@@ -150,13 +153,28 @@ const CreatePerson = () => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>Info</label>
-          <textarea
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
+          <label className={styles.label}>Date of Birth</label>
+          <input
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
             required
-            className={styles.textarea}
+            className={styles.input}
           />
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Type</label>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            required
+            className={styles.select}
+          >
+            <option value="Adult">Adult</option>
+            <option value="Student">Student</option>
+            <option value="Senior">Senior</option>
+            <option value="Child">Child</option>
+          </select>
         </div>
         <button type="submit" className={styles.button}>
           Create Person

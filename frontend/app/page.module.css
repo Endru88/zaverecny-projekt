@@ -1,129 +1,235 @@
-/* page.module.css */
+/* General Styles */
+.body {
+  font-family: 'Arial', sans-serif; /* Modern font */
+  margin: 0; /* Remove default margin */
+}
+
+/* Container */
 .container {
   flex: 1;
   padding: 40px;
-  min-height: 20vh; /* Full height */
+  min-height: 100vh; /* Full height */
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center horizontally */
+  flex-direction: row; /* Keep calendar and sidebar side by side */
+  align-items: flex-start; /* Align items to the top */
   background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
-  }
-  
-  .heading {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333; /* Dark gray for headings */
-    font-size: 2.5rem; /* Larger heading */
-    font-weight: 600; /* Bold heading */
-    transition: color 0.3s; /* Transition for hover effect */
-  }
-  
-  .heading:hover {
-    color: #555; /* Slightly darker gray on hover */
-  }
-  
+}
+
+/* Heading */
+.heading {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white; /* White for headings */
+  font-size: 2.5rem; /* Larger heading */
+  font-weight: 700; /* Bold heading */
+}
+
+/* Calendar Container */
+.calendarContainer {
+  flex: 2; /* Allocate more space for the calendar */
+  margin-right: 20px; /* Space between calendar and sidebar */
+}
+
+/* Hlavní kontejner kalendáře */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* 7 dní + časový sloupec */
+  grid-template-rows: repeat(15, 60px); /* 15 řádků pro časové sloty */
+  gap: 15px; /* Mezera mezi buňkami */
+  padding: 20px; /* Vnitřní okraj pro kalendář */
+  background-color: #ffffff; /* Bílé pozadí pro čistý vzhled */
+  border-radius: 12px; /* Zaoblené rohy */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Měkčí stín */
+}
+
+/* Hlavní hlavička kalendáře */
+.header {
+  display: contents; /* Umožňuje headeru roztáhnout se přes sloupce */
+}
+
+/* Buňky pro dny */
+.dayCell {
+  font-weight: bold;
+  text-align: center;
+  background-color: #2a6355; /* Hlavní barva pro hlavičky dnů */
+  color: #ffffff; /* Bílý text */
+  padding: 15px; /* Vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro buňky dnů */
+  transition: background-color 0.3s; /* Plynulý přechod pro hover */
+}
+
+.dayCell:hover {
+  background-color: #214d42; /* Tmavší odstín při přejetí */
+}
+
+/* Řádek pro čas */
+.timeRow {
+  display: contents; /* Umožňuje řádkům s časem roztáhnout se */
+}
+
+/* Buňky pro čas */
+.timeCell {
+  text-align: right;
+  padding-right: 15px; /* Vycpání doprava pro čas */
+  background-color: #80ed6d86; /* Světlejší odstín pro časové buňky */
+  color: #6a1b9a; /* Tmavší text pro kontrast */
+  border-radius: 10px; /* Zaoblené rohy pro buňky času */
+}
+
+/* Buňky pro lekce */
+.lessonCell {
+  position: relative; /* Pro absolutní pozicování lekcí */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulé přechody */
+  background-color: #f1f8e900; /* Světle zelené pozadí pro prázdné buňky lekcí */
+  border: 1px solid #e0e0e000; /* Světle šedý okraj */
+  border-radius: 10px; /* Zaoblené rohy pro buňky lekcí */
+  padding: 10px; /* Vnitřní vycpání pro lekce */
+  flex: 1; /* Zajistí, že všechny buňky budou mít stejnou šířku */
+}
+
+/* Pro lekce */
+.hasLesson {
+  background-color: #80ed6d; /* Světle žlutá pro lekce */
+}
+
+/* Obsah lekce */
+.lessonContent {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #80ed6d; /* Tmavší žlutá pro lekce */
+  color: #333; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+
+.lessonContent:hover {
+  background-color: #68bc5a; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}
+
+/* Styl pro texty kalendáře */
+.calendar h2 {
+  font-size: 24px; /* Velikost nadpisu */
+  text-align: center; /* Středění nadpisu */
+  margin: 0 0 20px; /* Okraj dolů pro oddělení od kalendáře */
+  color: #6a1b9a; /* Hlavní barva pro texty */
+}
+
+/* Písmo pro všechny texty v kalendáři */
+.calendar {
+  font-family: 'Arial', sans-serif; /* Moderní font pro texty */
+  color: #555; /* Tmavě šedý text pro lepší čitelnost */
+}
+
+
+/* Sidebar Styles */
+.sidebar {
+  flex: 1; /* Sidebar takes less space */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* User Info and Login Styles */
+.userInfo,
+.loginPrompt {
+  padding: 20px;
+  text-align: center; /* Center text for better layout */
+}
+
+.userName {
+  font-size: 1.8rem; /* Bigger font size for the user's name */
+  margin-bottom: 10px; /* Space below the name */
+  color: #00796b; /* Color for the user's name */
+}
+
+.userDetails {
+  margin: 5px 0; /* Space between lines of details */
+  color: #555; /* A softer color for the details */
+}
+
+/* Button Styles */
+.loginButton,
+.editButton {
+  display: inline-block;
+  padding: 12px; /* Slightly larger padding */
+  background-color: #2a6355; /* Blue background */
+  color: #ffffff; /* White text */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  width: 100%; /* Full width button */
+}
+
+.loginButton:hover,
+.editButton:hover {
+  background-color: #1d4138; /* Darker blue on hover */
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+}
+
+.modalContent {
+  background-color: #ffffff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.3s;
+  transform: translateY(-10px); /* Slight lift animation */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Error Styles */
+.error {
+  color: red; /* Red for error messages */
+  text-align: center; /* Center error message */
+  margin-bottom: 10px; /* Margin below error */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .calendar {
-    display: grid;
-    grid-template-columns: auto repeat(7, 1fr);
-    grid-template-rows: repeat(16, 60px); /* Increased height for better visibility */
-    gap: 1px; /* Gap between cells */
-    background-color: #e0e0e0; /* Gray background for the calendar */
-    border-radius: 10px; /* Rounded corners */
+    grid-template-rows: repeat(16, 40px); /* Smaller time slot height on small screens */
   }
-  
-  .header {
-    display: contents;
-  }
-  
-  .dayCell {
-    font-weight: bold;
-    text-align: center;
-    background-color: #00796b; /* Teal for day headers */
-    color: #ffffff; /* White text for contrast */
-    padding: 10px;
-    border: 1px solid #004d40; /* Darker teal border */
-    transition: background-color 0.3s; /* Smooth transition */
-  }
-  
-  .timeRow {
-    display: contents;
-  }
-  
-  .timeCell {
-    text-align: right;
-    padding-right: 10px;
-    background-color: #80cbc4; /* Lighter teal */
-    color: #004d40; /* Darker text for contrast */
-    border: 1px solid #004d40; /* Darker border */
-  }
-  
-  .lessonCell {
-    border: 1px solid #004d40; /* Darker border */
-    position: relative; /* Required for absolute positioning of lessons */
-    transition: background-color 0.3s; /* Smooth transition */
-  }
-  
-  .hasLesson {
-    background-color: #ffccbc; /* Soft peach for lessons */
-  }
-  
-  .lessonContent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9c27a; /* Darker peach on hover */
-    color: #333; /* Dark text for better contrast */
-    font-weight: bold; /* Bold text for lessons */
-    padding: 5px;
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition on hover */
-  }
-  
-  .lessonContent:hover {
-    background-color: #ffab40; /* Darker peach on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  .modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
-  }
-  
+
   .modalContent {
-    background-color: #ffffff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    transition: transform 0.3s; /* Transition for modal */
-    transform: translateY(-10px); /* Initial slight lift */
+    width: 90%; /* Full width for modal on small screens */
   }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
+}

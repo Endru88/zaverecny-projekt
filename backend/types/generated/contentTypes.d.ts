@@ -924,7 +924,9 @@ export interface ApiPersonPerson extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    status: Attribute.Enumeration<['Club member', 'Client', 'Permament']> &
+    status: Attribute.Enumeration<
+      ['Club member', 'Client', 'Permanent', 'Multisport']
+    > &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -937,6 +939,19 @@ export interface ApiPersonPerson extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    dateofbirth: Attribute.Date &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.Enumeration<['Student', 'Adult', 'Child', 'Senior']> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

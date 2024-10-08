@@ -1,18 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
-import Navbar from './templates/navbar/navbar';  // Reuse Navbar component
-import Footer from './templates/footer/footer';  // Reuse Footer component
+import Navbar from './templates/navbar/navbar'; // Reuse Navbar component
+import Footer from './templates/footer/footer'; // Reuse Footer component
 
 const Calendar = ({ lessons, onLessonClick }) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const timeSlots = Array.from({ length: 15 }, (_, i) => `${i + 8}:00`); // 8:00 to 22:00
-
-  const getCellSpan = (start, end) => {
-    const startHour = Math.floor(start.getHours() + start.getMinutes() / 60);
-    const endHour = Math.ceil(end.getHours() + end.getMinutes() / 60);
-    return { startHour, endHour };
-  };
 
   return (
     <div className={styles.calendar}>
@@ -67,6 +61,9 @@ const HomePage = () => {
   const [lessons, setLessons] = useState([]);
   const [reservations, setReservations] = useState({});
   const [selectedLesson, setSelectedLesson] = useState(null); // State for the selected lesson
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulating user login state
+  const [user, setUser] = useState(null); // User data
+  const [person, setPerson] = useState(null); // Person data
 
   useEffect(() => {
     const fetchLessonsAndReservations = async () => {
@@ -97,7 +94,43 @@ const HomePage = () => {
       }
     };
 
+    const fetchUserData = async () => {
+      // Get user data from local storage
+      const userId = localStorage.getItem('userId');
+      const token = localStorage.getItem('jwt');
+
+      if (userId && token) {
+        try {
+          // Fetch the associated person for the logged-in user
+          const personResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/people?filters[users_permissions_user]=${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const personData = await personResponse.json();
+          setPerson(personData.data[0]); // Assuming there is always one person associated with a user
+
+          // Set user data from local storage or defaults
+          const userData = {
+            name: localStorage.getItem('username') || 'John Doe',
+            telephone: personData.data[0]?.attributes.telephone || 'N/A',
+            email: personData.data[0]?.attributes.email || 'N/A',
+            address: personData.data[0]?.attributes.address || 'N/A',
+            postal: personData.data[0]?.attributes.Postal || 'N/A',
+            dateofbirth: personData.data[0]?.attributes.dateofbirth || new Date('2000-01-01').toISOString(),
+          };
+
+          setUser(userData);
+          setIsLoggedIn(!!token); // Check if user is logged in
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    };
+
     fetchLessonsAndReservations();
+    fetchUserData(); // Fetch user data on component mount
   }, []);
 
   const handleLessonClick = (lesson) => {
@@ -112,8 +145,36 @@ const HomePage = () => {
     <div>
       <Navbar />
       <div className={styles.container}>
-        <h1 className={styles.heading}>Weekly Schedule</h1>
-        <Calendar lessons={lessons} onLessonClick={handleLessonClick} />
+        <div className={styles.calendarContainer}>
+          <h1 className={styles.heading}>Weekly Schedule</h1>
+          <Calendar lessons={lessons} onLessonClick={handleLessonClick} />
+        </div>
+
+        {/* Sidebar for user data */}
+        <div className={styles.sidebar}>
+        {isLoggedIn ? (
+  <div className={styles.userInfo}>
+    <h2 className={styles.userName}>{person ? person.attributes.name : 'Loading...'} {person ? person.attributes.surname : ''}</h2>
+    {person ? (
+      <>
+        <p className={styles.userDetails}><strong>Telephone:</strong> {user.telephone}</p>
+        <p className={styles.userDetails}><strong>Email:</strong> {user.email}</p>
+        <p className={styles.userDetails}><strong>Address:</strong> {user.address}</p>
+        <p className={styles.userDetails}><strong>Postal Code:</strong> {user.postal}</p>
+        <p className={styles.userDetails}><strong>Date of Birth:</strong> {user.dateofbirth}</p>
+        <button className={styles.editButton}>Edit Information</button>
+      </>
+    ) : (
+      <p>Loading person data...</p>
+    )}
+  </div>
+) : (
+  <div className={styles.loginPrompt}>
+    <p>To see your personal data, please log in.</p>
+    <button className={styles.loginButton}>Log In</button>
+  </div>
+)}
+        </div>
 
         {/* Modal for lesson details */}
         {selectedLesson && (
