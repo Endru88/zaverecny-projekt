@@ -34,7 +34,7 @@
 
 ### ŘÍJEN:
   - frontend- uprava hlavní stránky, detail uživatele, restyling 8.10. 2h
-  - Docker - frontend funkční ,backend nefunkční
+  - Docker - frontend funkční ,backend nefunkční 16.10 3h
   -
   -
   -- NEDODĚLÁNO:frontend- user == úprava profilu
