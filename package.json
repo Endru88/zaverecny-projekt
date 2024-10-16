@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@swc/cli": "^0.4.1-nightly.20240914",
+    "@swc/core": "^1.7.36",
     "axios": "^1.7.7"
   }
 }
