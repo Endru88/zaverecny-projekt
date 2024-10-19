@@ -1,19 +1,20 @@
-# Dockerfile for Next.js
-FROM node:18-alpine3.18
+# Use Node.js base image
+FROM node:18-alpine
 
-WORKDIR /app
+# Set working directory
+WORKDIR /opt/app
 
-# Copy package.json and package-lock.json (or yarn.lock) first
-COPY package*.json ./
+# Copy package files
+COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of your application code
 COPY . .
 
-# Expose the port
+# Expose the application port
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start", "dev"]
+CMD ["npm", "run", "dev"]

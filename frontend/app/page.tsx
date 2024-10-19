@@ -29,8 +29,8 @@ const Calendar = ({ lessons, onLessonClick }) => {
               if (lessonDay !== day) return false;
 
               // Calculate start and end hour indices
-              const startHour = start.getHours();
-              const endHour = end.getHours();
+              const startHour = start.getHours() -1;
+              const endHour = end.getHours() -1;
 
               // Check if lesson overlaps with the current time slot
               return (startHour === parseInt(time) && start.getMinutes() > 0) ||
@@ -71,20 +71,35 @@ const HomePage = () => {
         // Fetch lessons with trainer and room data
         const lessonResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons?populate=trainer&populate=room`);
         const lessonData = await lessonResponse.json();
-        const lessons = lessonData.data || [];
-
+        let lessons = lessonData.data || [];
+    
+        // Get the start and end of the current week
+        const startOfWeek = new Date();
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1); // Set to Monday
+        startOfWeek.setHours(0, 0, 0, 0); // Set to start of Monday
+    
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6); // Set to Sunday
+        endOfWeek.setHours(23, 59, 59, 999); // Set to end of Sunday
+    
+        // Filter lessons to only include those within the current week
+        lessons = lessons.filter((lesson) => {
+          const lessonStart = new Date(lesson.attributes.Start);
+          return lessonStart >= startOfWeek && lessonStart <= endOfWeek;
+        });
+    
         // Fetch reservations
         const reservationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reservations?populate=lesson`);
         const reservationData = await reservationResponse.json();
         const reservations = reservationData.data || [];
-
+    
         // Count how many people joined each lesson
         const reservationCounts = {};
         reservations.forEach((reservation) => {
           const lessonId = reservation.attributes.lesson.data.id;
           reservationCounts[lessonId] = (reservationCounts[lessonId] || 0) + 1;
         });
-
+    
         setLessons(lessons);
         setReservations(reservationCounts);
       } catch (error) {
@@ -93,6 +108,8 @@ const HomePage = () => {
         setReservations({});
       }
     };
+    
+    
 
     const fetchUserData = async () => {
       // Get user data from local storage
