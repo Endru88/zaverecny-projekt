@@ -35,7 +35,7 @@
 ### ŘÍJEN:
   - frontend- uprava hlavní stránky, detail uživatele, restyling 8.10. 2h
   - Docker - NEZPROVOTNĚNO  16.10 4h
-  - frontend - calender fix 19.10 1h
+  - frontend - calender fix, admin user=edit client+extra info change, client= edit profile 19.10 4h
   -
   -- NEDODĚLÁNO:frontend- user == úprava profilu, DOCKER !!!!!!!!!!!!
 
