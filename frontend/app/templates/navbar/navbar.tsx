@@ -4,26 +4,32 @@ import styles from './navbar.module.css';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userName, setUserName] = useState<string | null>(null); // State for storing user's name
+  const [userRole, setUserRole] = useState<string | null>(null); // State for storing user's role
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   useEffect(() => {
-    // Retrieve user's name from local storage if available
-    const storedUserName = localStorage.getItem('username'); // Make sure to use 'username' here
+    // Retrieve user's name and role from local storage if available
+    const storedUserName = localStorage.getItem('username');
+    const storedUserRole = localStorage.getItem('userRole'); // Ensure this key matches what you stored
     if (storedUserName) {
       setUserName(storedUserName);
+    }
+    if (storedUserRole) {
+      setUserRole(storedUserRole);
     }
   }, []);
 
   const handleLogout = () => {
     // Clear user information from local storage
-    localStorage.removeItem('jwt'); // Remove JWT token
-    localStorage.removeItem('username'); // Remove user name (ensure the key matches what you stored)
-    setUserName(null); // Reset user name in state
-    // Optionally, redirect to login page
-    window.location.href = '/login'; // Redirect to login page
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role'); // Clear user role
+    setUserName(null);
+    setUserRole(null); // Reset user role in state
+    window.location.href = '/login';
   };
 
   return (
@@ -35,6 +41,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className={`${styles.menu} ${mobileMenuOpen ? styles.mobile : ''}`}>
         <a href="/team">Our Team</a>
+        {userRole === 'admin' && <a href="/osoby">Osoby</a>} {/* Show link if user is admin */}
         {userName ? (
           <>
             <span className={styles.userName}>{userName}</span>

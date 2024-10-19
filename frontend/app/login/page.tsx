@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`, {
         method: 'POST',
@@ -24,25 +24,35 @@ const Login = () => {
           password,
         }),
       });
-
+  
       const data = await res.json();
-
+  
       if (res.ok) {
-        // Store the JWT token and username
+        // Store the JWT token, username, and role
         localStorage.setItem('jwt', data.jwt);
         localStorage.setItem('userId', data.user.id); // Assuming user object has an id
         localStorage.setItem('username', data.user.username);
-      
-
+  
+        // Fetch user with role
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${data.user.id}?populate=role`, {
+          headers: {
+            Authorization: `Bearer ${data.jwt}`,
+          },
+        });
+        const userData = await userRes.json();
+  
+        // Store the user's role
+        localStorage.setItem('userRole', userData.role.name); // Adjust based on your role structure
+  
         // Step 1: Fetch the associated person for the logged-in user
         const peopleRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/people?filters[users_permissions_user]=${data.user.id}`, {
           headers: {
             Authorization: `Bearer ${data.jwt}`,
           },
         });
-
+  
         const peopleData = await peopleRes.json();
-
+  
         // Step 2: Check if a person profile exists
         if (peopleData.data && peopleData.data.length > 0) {
           // User has a person profile, redirect to home page or profile page
@@ -58,7 +68,7 @@ const Login = () => {
       setError('Login failed. Please try again.');
     }
   };
-
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Login</h1>
