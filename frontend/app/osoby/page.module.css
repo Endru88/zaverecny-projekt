@@ -61,3 +61,19 @@
   font-size: 2.5rem; /* Larger heading */
   font-weight: 700; /* Bold heading */
 }
+.searchInput {
+  width: 100%; /* Full width of the container */
+  padding: 10px; /* Padding for spacing */
+  margin-bottom: 20px; /* Space below the search input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1em; /* Font size */
+  color: #333; /* Text color */
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+  outline: none; /* Remove default outline */
+}
+
+.searchInput:focus {
+  border-color: #007BFF; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow on focus */
+}

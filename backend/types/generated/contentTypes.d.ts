@@ -1109,6 +1109,11 @@ export interface ApiTrainerTrainer extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    users_permissions_user: Attribute.Relation<
+      'api::trainer.trainer',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

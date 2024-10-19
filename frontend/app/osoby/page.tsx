@@ -29,6 +29,7 @@ interface Osoba {
 const Osoby = () => {
   const [osoby, setOsoby] = useState<Osoba[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');  // Search query state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,36 +44,51 @@ const Osoby = () => {
     fetchData();
   }, []);
 
+  // Filter people based on search query
+  const filteredOsoby = osoby.filter((osoba) =>
+    `${osoba.attributes.name} ${osoba.attributes.surname}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div>
-      {/* Navbar at the top */}
       <Navbar />
 
-      {/* Content below the navbar */}
+      {/* Search bar */}
       <div className={styles.container}>
-  <h1 className={styles.heading}>People</h1>
-  {error && <p className={styles.error}>{error}</p>}
-  <div className={styles.list}>
-    {osoby.length > 0 ? (
-      osoby.map((osoba) => (
-        <div key={osoba.id} className={styles.card}>
-          <div className={styles.details}>
-            <span className={styles.name}>{osoba.attributes.name} {osoba.attributes.surname}</span>
-            <span>{osoba.attributes.status}</span>
-          </div>
-          <Link href={`/osoby/${osoba.id}`} passHref>
-  <button className={styles.detailsButton}>Details</button>
-</Link>
+        <h1 className={styles.heading}>People</h1>
+        {error && <p className={styles.error}>{error}</p>}
+        
+        <input
+          type="text"
+          placeholder="Search by name or surname"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}  // Update search query on input
+          className={styles.searchInput}
+        />
+
+        <div className={styles.list}>
+          {filteredOsoby.length > 0 ? (
+            filteredOsoby.map((osoba) => (
+              <div key={osoba.id} className={styles.card}>
+                <div className={styles.details}>
+                  <span className={styles.name}>
+                    {osoba.attributes.name} {osoba.attributes.surname}
+                  </span>
+                  <span>{osoba.attributes.status}</span>
+                </div>
+                <Link href={`/osoby/${osoba.id}`} passHref>
+                  <button className={styles.detailsButton}>Details</button>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>No people found.</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p>No people found.</p>
-    )}
-  </div>
-</div>
+      </div>
 
-
-      {/* Footer at the bottom */}
       <Footer />
     </div>
   );

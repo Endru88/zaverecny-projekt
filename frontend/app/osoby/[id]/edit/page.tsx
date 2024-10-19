@@ -22,7 +22,13 @@ interface Osoba {
     address: string;
     Postal: string;
     status: string;
+    dateofbirth: string;
+    type: string;
     Info: Info[];
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
   };
 }
 
@@ -32,8 +38,12 @@ const EditOsoba = () => {
   const [osoba, setOsoba] = useState<Osoba | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Osoba['attributes'] | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
+    const role = localStorage.getItem('userRole');
+    setUserRole(role);
+
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/people/${id}`);
@@ -44,24 +54,26 @@ const EditOsoba = () => {
         setError(`Error fetching person: ${error.response ? error.response.data.message : error.message}`);
       }
     };
+
     if (id) fetchData();
   }, [id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index?: number) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if (formData) {
-      if (index !== undefined) {
-        // Handle Info updates
-        const updatedInfo = formData.Info.map((info, i) =>
-          i === index ? { ...info, children: [{ type: 'text', text: e.target.value }] } : info
-        );
-        setFormData({ ...formData, Info: updatedInfo });
-      } else {
-        // Handle regular field updates
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-        });
-      }
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (formData) {
+      const updatedInfo = e.target.value.split(', ').map(text => ({
+        type: 'paragraph',
+        children: [{ type: 'text', text }],
+      }));
+      setFormData({ ...formData, Info: updatedInfo });
     }
   };
 
@@ -83,6 +95,9 @@ const EditOsoba = () => {
       }
     }
   };
+
+
+  
 
   return (
     <div>
@@ -110,29 +125,64 @@ const EditOsoba = () => {
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>Address:</label>
-              <input name="text" className={`${styles.input} `} value={formData.address} onChange={handleChange} required />
+              <input name="address" className={styles.input} value={formData.address} onChange={handleChange} required />
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>Postal Code:</label>
               <input type="text" name="Postal" className={styles.input} value={formData.Postal} onChange={handleChange} required />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>Status:</label>
-              <input type="text" name="status" className={styles.input} value={formData.status} onChange={handleChange} required />
+              <label className={styles.label}>Date of Birth:</label>
+              <input type="date" name="dateofbirth" className={styles.input} value={formData.dateofbirth || ''} onChange={handleChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Type:</label>
+              <select
+                name="type"
+                className={styles.input}
+                value={formData.type || ''}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Type</option>
+                <option value="Student">Student</option>
+                <option value="Adult">Adult</option>
+                <option value="Child">Child</option>
+                <option value="Senior">Senior</option>
+              </select>
             </div>
 
-            {/* Info section */}
-            <h3 className={styles.label}>Additional Information:</h3>
-            {formData.Info.map((info, index) => (
-              <div key={index} className={styles.formGroup}>
-                <textarea
-                  value={info.children[0]?.text || ''}
-                  onChange={(e) => handleChange(e, index)}
-                  className={`${styles.input} ${styles.textarea}`}
+            {/* Render status input for Admin */}
+            {userRole === 'admin' && (
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Status:</label>
+                <select
+                  name="status"
+                  className={styles.input}
+                  value={formData.status || ''}
+                  onChange={handleChange}
                   required
+                >
+                  <option value="Club member">Club member</option>
+                  <option value="Client">Client</option>
+                  <option value="Permanent">Permanent</option>
+                  <option value="Multisport">Multisport</option>
+                </select>
+              </div>
+            )}
+
+            {/* Render Info input for Admin */}
+            {userRole === 'admin' && Array.isArray(formData.Info) && formData.Info.length > 0 && (
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Additional Information:</label>
+                <textarea
+                  name="Info"
+                  className={styles.input}
+                  value={formData.Info.map(info => info.children.map(child => child.text).join(' ')).join(', ')}
+                  onChange={handleInfoChange}
                 />
               </div>
-            ))}
+            )}
 
             <button type="submit" className={styles.submitButton}>Save Changes</button>
           </form>

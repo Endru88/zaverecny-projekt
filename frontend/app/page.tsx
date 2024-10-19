@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link'; // Use Link
 import styles from './page.module.css';
 import Navbar from './templates/navbar/navbar'; // Reuse Navbar component
 import Footer from './templates/footer/footer'; // Reuse Footer component
@@ -29,13 +30,15 @@ const Calendar = ({ lessons, onLessonClick }) => {
               if (lessonDay !== day) return false;
 
               // Calculate start and end hour indices
-              const startHour = start.getHours() -1;
-              const endHour = end.getHours() -1;
+              const startHour = start.getHours ()-1;
+              const endHour = end.getHours()-1;
 
               // Check if lesson overlaps with the current time slot
-              return (startHour === parseInt(time) && start.getMinutes() > 0) ||
+              return (
+                (startHour === parseInt(time) && start.getMinutes() > 0) ||
                 (endHour === parseInt(time) && end.getMinutes() === 0) ||
-                (startHour < parseInt(time) && endHour > parseInt(time));
+                (startHour < parseInt(time) && endHour > parseInt(time))
+              );
             });
 
             return (
@@ -57,43 +60,39 @@ const Calendar = ({ lessons, onLessonClick }) => {
   );
 };
 
+
 const HomePage = () => {
   const [lessons, setLessons] = useState([]);
   const [reservations, setReservations] = useState({});
-  const [selectedLesson, setSelectedLesson] = useState(null); // State for the selected lesson
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulating user login state
-  const [user, setUser] = useState(null); // User data
-  const [person, setPerson] = useState(null); // Person data
+  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [person, setPerson] = useState(null);
 
   useEffect(() => {
     const fetchLessonsAndReservations = async () => {
       try {
-        // Fetch lessons with trainer and room data
         const lessonResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons?populate=trainer&populate=room`);
         const lessonData = await lessonResponse.json();
         let lessons = lessonData.data || [];
     
-        // Get the start and end of the current week
         const startOfWeek = new Date();
-        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1); // Set to Monday
-        startOfWeek.setHours(0, 0, 0, 0); // Set to start of Monday
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
+        startOfWeek.setHours(0, 0, 0, 0);
     
         const endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(endOfWeek.getDate() + 6); // Set to Sunday
-        endOfWeek.setHours(23, 59, 59, 999); // Set to end of Sunday
+        endOfWeek.setDate(endOfWeek.getDate() + 6);
+        endOfWeek.setHours(23, 59, 59, 999);
     
-        // Filter lessons to only include those within the current week
         lessons = lessons.filter((lesson) => {
           const lessonStart = new Date(lesson.attributes.Start);
           return lessonStart >= startOfWeek && lessonStart <= endOfWeek;
         });
     
-        // Fetch reservations
         const reservationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reservations?populate=lesson`);
         const reservationData = await reservationResponse.json();
         const reservations = reservationData.data || [];
     
-        // Count how many people joined each lesson
         const reservationCounts = {};
         reservations.forEach((reservation) => {
           const lessonId = reservation.attributes.lesson.data.id;
@@ -108,17 +107,13 @@ const HomePage = () => {
         setReservations({});
       }
     };
-    
-    
 
     const fetchUserData = async () => {
-      // Get user data from local storage
       const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('jwt');
 
       if (userId && token) {
         try {
-          // Fetch the associated person for the logged-in user
           const personResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/people?filters[users_permissions_user]=${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -126,9 +121,8 @@ const HomePage = () => {
           });
 
           const personData = await personResponse.json();
-          setPerson(personData.data[0]); // Assuming there is always one person associated with a user
+          setPerson(personData.data[0]);
 
-          // Set user data from local storage or defaults
           const userData = {
             name: localStorage.getItem('username') || 'John Doe',
             telephone: personData.data[0]?.attributes.telephone || 'N/A',
@@ -136,10 +130,12 @@ const HomePage = () => {
             address: personData.data[0]?.attributes.address || 'N/A',
             postal: personData.data[0]?.attributes.Postal || 'N/A',
             dateofbirth: personData.data[0]?.attributes.dateofbirth || new Date('2000-01-01').toISOString(),
+            status: personData.data[0]?.attributes.status || 'N/A', // Add status
+            type: personData.data[0]?.attributes.type || 'N/A' // Add type
           };
-
+          
           setUser(userData);
-          setIsLoggedIn(!!token); // Check if user is logged in
+          setIsLoggedIn(!!token);
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -147,15 +143,15 @@ const HomePage = () => {
     };
 
     fetchLessonsAndReservations();
-    fetchUserData(); // Fetch user data on component mount
+    fetchUserData();
   }, []);
 
   const handleLessonClick = (lesson) => {
-    setSelectedLesson(lesson); // Set the selected lesson
+    setSelectedLesson(lesson);
   };
 
   const closeModal = () => {
-    setSelectedLesson(null); // Clear the selected lesson
+    setSelectedLesson(null);
   };
 
   return (
@@ -167,11 +163,12 @@ const HomePage = () => {
           <Calendar lessons={lessons} onLessonClick={handleLessonClick} />
         </div>
 
-        {/* Sidebar for user data */}
         <div className={styles.sidebar}>
         {isLoggedIn ? (
   <div className={styles.userInfo}>
-    <h2 className={styles.userName}>{person ? person.attributes.name : 'Loading...'} {person ? person.attributes.surname : ''}</h2>
+    <h2 className={styles.userName}>
+      {person ? person.attributes.name : 'Loading...'} {person ? person.attributes.surname : ''}
+    </h2>
     {person ? (
       <>
         <p className={styles.userDetails}><strong>Telephone:</strong> {user.telephone}</p>
@@ -179,7 +176,11 @@ const HomePage = () => {
         <p className={styles.userDetails}><strong>Address:</strong> {user.address}</p>
         <p className={styles.userDetails}><strong>Postal Code:</strong> {user.postal}</p>
         <p className={styles.userDetails}><strong>Date of Birth:</strong> {user.dateofbirth}</p>
-        <button className={styles.editButton}>Edit Information</button>
+        <p className={styles.userDetails}><strong>Status:</strong> {user.status}</p> {/* Display status */}
+        <p className={styles.userDetails}><strong>Type:</strong> {user.type}</p> {/* Display type */}
+        <Link href={`/osoby/${person.id}/edit`}>
+          <button className={styles.editButton}>Edit Information</button>
+        </Link>
       </>
     ) : (
       <p>Loading person data...</p>
@@ -193,7 +194,6 @@ const HomePage = () => {
 )}
         </div>
 
-        {/* Modal for lesson details */}
         {selectedLesson && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
@@ -202,11 +202,7 @@ const HomePage = () => {
               <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
               <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
               <p><strong>Description:</strong> {selectedLesson.attributes.Description || 'No description available.'}</p>
-
-              {/* Trainer Information */}
               <p><strong>Trainer:</strong> {selectedLesson.attributes.trainer.data.attributes.name} {selectedLesson.attributes.trainer.data.attributes.surname}</p>
-
-              {/* Room Information */}
               {selectedLesson.attributes.room.data ? (
                 <>
                   <p><strong>Room:</strong> {selectedLesson.attributes.room.data.attributes.Name}</p>
@@ -215,8 +211,6 @@ const HomePage = () => {
               ) : (
                 <p><strong>Room:</strong> Not assigned</p>
               )}
-
-              {/* Joined People */}
               <p><strong>Joined:</strong> {reservations[selectedLesson.id] || 0} / {selectedLesson.attributes.room.data ? selectedLesson.attributes.room.data.attributes.Capacity : 'N/A'}</p>
             </div>
           </div>
@@ -228,3 +222,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

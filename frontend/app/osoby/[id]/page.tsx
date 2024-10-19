@@ -31,8 +31,13 @@ const OsobaDetails = () => {
   const router = useRouter();
   const [osoba, setOsoba] = useState<Osoba | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null); // State to hold user role
 
   useEffect(() => {
+    // Retrieve user role from local storage
+    const role = localStorage.getItem('userRole');
+    setUserRole(role);
+
     if (id) {
       const fetchData = async () => {
         try {
@@ -66,8 +71,8 @@ const OsobaDetails = () => {
               <p><strong>Status:</strong> {osoba.attributes.status}</p>
             </div>
 
-            {/* Render Info array */}
-            {osoba.attributes.Info.length > 0 && (
+            {/* Render Info array if user is an admin */}
+            {userRole === 'admin' && osoba.attributes.Info.length > 0 && (
               <div className={styles.infoList}>
                 <h3>Additional Information</h3>
                 <ul>
