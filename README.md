@@ -34,10 +34,10 @@
 
 ### ŘÍJEN:
   - frontend- uprava hlavní stránky, detail uživatele, restyling 8.10. 2h
+  - Docker - NEZPROVOTNĚNO  16.10 4h
   -
   -
-  -
-  -- NEDODĚLÁNO:frontend- user == úprava profilu
+  -- NEDODĚLÁNO:frontend- user == úprava profilu, DOCKER !!!!!!!!!!!!
 
 ### LISTOPAD:
   - 
