@@ -1,0 +1,86 @@
+/* Container Styling */
+.container {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #80ed6d, #2193b0);
+  }
+  
+  /* Lesson List Styling */
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Card for Each Lesson */
+  .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+  }
+  
+  /* Details Styling */
+  .details {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .details span {
+    padding: 5px;
+    flex: 1;
+  }
+  
+  .details .name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Button Styling */
+  .detailsButton {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .detailsButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Heading Styling */
+  .heading {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  /* Search Input Styling */
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+  }
+  
+  .searchInput:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  

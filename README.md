@@ -36,7 +36,7 @@
   - frontend- uprava hlavní stránky, detail uživatele, restyling 8.10. 2h
   - Docker - NEZPROVOTNĚNO  16.10 4h
   - frontend - calender fix, admin user=edit client+extra info change, client= edit profile 19.10 4h
-  -
+  - frontend - lessons page, edit lesson, details lesson, admin show  28.10 2h
   -- NEDODĚLÁNO:frontend- user == úprava profilu, DOCKER !!!!!!!!!!!!
 
 ### LISTOPAD:
