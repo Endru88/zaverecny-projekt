@@ -47,14 +47,14 @@
     margin-left: 10px;
     padding: 5px 10px;
     border: none;
-    background-color: #007BFF;
+    background-color: #2a6355;
     color: white;
     cursor: pointer;
     border-radius: 4px;
   }
   
   .detailsButton:hover {
-    background-color: #0056b3;
+    background-color: #1e473c;
   }
   
   /* Heading Styling */
@@ -80,7 +80,44 @@
   }
   
   .searchInput:focus {
-    border-color: #007BFF;
+    border-color: #2a6355;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
-  
+ /* Flex Container for Month and Week */
+.selectContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Dropdown Select Styling */
+.selectInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cccccc00;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0.203);
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #ffffff, #d0d0d0);
+}
+
+/* Focus Effect */
+.selectInput:focus {
+  border-color: #007bff00;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0);
+}
+.createButton {
+  background-color: #2a6355; /* Green */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.createButton:hover {
+  background-color: #1c4339; /* Darker green */
+}

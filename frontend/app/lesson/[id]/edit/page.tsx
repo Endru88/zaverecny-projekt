@@ -41,22 +41,21 @@ const EditLesson = () => {
 
   useEffect(() => {
     const fetchLessonData = async () => {
-        try {
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}?populate=trainer&populate=room`);
-          const lessonData = response.data.data;
-          setLesson(lessonData);
-          setFormData({
-            Name: lessonData.attributes.Name,
-            Start: lessonData.attributes.Start,
-            End: lessonData.attributes.End,
-            trainer: lessonData.attributes.trainer?.data?.id || '', // Use the trainer ID or empty string if null
-            room: lessonData.attributes.room?.data?.id || '', // Use the room ID or empty string if null
-          });
-        } catch (error: any) {
-          setError(`Error fetching lesson: ${error.message}`);
-        }
-      };
-      
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}?populate=trainer&populate=room`);
+        const lessonData = response.data.data;
+        setLesson(lessonData);
+        setFormData({
+          Name: lessonData.attributes.Name,
+          Start: lessonData.attributes.Start,
+          End: lessonData.attributes.End,
+          trainer: lessonData.attributes.trainer?.data?.id || '',
+          room: lessonData.attributes.room?.data?.id || '',
+        });
+      } catch (error: any) {
+        setError(`Error fetching lesson: ${error.message}`);
+      }
+    };
 
     const fetchTrainers = async () => {
       try {
@@ -94,42 +93,27 @@ const EditLesson = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (formData) {
-      // Check if the form data has changed
-      const originalLesson = lesson?.attributes;
-  
-      // Create an object to hold the updated data
       const updatedData = {
         ...formData,
         trainer: parseInt(formData.trainer as any),
         room: parseInt(formData.room as any),
       };
-  
-      // Check if any field has changed
-      const hasChanged = 
-        updatedData.Name !== originalLesson?.Name || 
-        updatedData.Start !== originalLesson?.Start || 
-        updatedData.End !== originalLesson?.End || 
-        updatedData.trainer !== originalLesson?.trainer || 
-        updatedData.room !== originalLesson?.room;
-  
-      // If there are changes, proceed with the PUT request
-      if (hasChanged) {
-        try {
-          await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}`, {
-            data: updatedData,
-          });
+
+      try {
+        const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}`, {
+          data: updatedData,
+        });
+
+        if (response.status === 200) {
           router.push(`/lesson/${id}`);
-        } catch (error: any) {
-          setError(`Error updating lesson: ${error.message}`);
         }
-      } else {
-        // If no changes, you might want to notify the user or simply do nothing
-        setError('No changes made to the lesson.');
+      } catch (error: any) {
+        setError(`Error updating lesson: ${error.message}`);
       }
     }
   };
-  
 
   return (
     <div>
@@ -180,7 +164,6 @@ const EditLesson = () => {
                 className={styles.input} 
                 value={formData.trainer} 
                 onChange={handleChange} 
-                
               >
                 {trainers.map((trainer) => (
                   <option key={trainer.id} value={trainer.id}>
@@ -197,7 +180,6 @@ const EditLesson = () => {
                 className={styles.input} 
                 value={formData.room} 
                 onChange={handleChange} 
-                
               >
                 {rooms.map((room) => (
                   <option key={room.id} value={room.id}>

@@ -201,7 +201,6 @@ const HomePage = () => {
               <h2>{selectedLesson.attributes.Name}</h2>
               <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
               <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
-              <p><strong>Description:</strong> {selectedLesson.attributes.Description || 'No description available.'}</p>
               <p><strong>Trainer:</strong> {selectedLesson.attributes.trainer.data.attributes.name} {selectedLesson.attributes.trainer.data.attributes.surname}</p>
               {selectedLesson.attributes.room.data ? (
                 <>

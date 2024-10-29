@@ -37,8 +37,10 @@
   - Docker - NEZPROVOTNĚNO  16.10 4h
   - frontend - calender fix, admin user=edit client+extra info change, client= edit profile 19.10 4h
   - frontend - lessons page, edit lesson, details lesson, admin show  28.10 2h
-  -
-  - NEDODĚLÁNO:frontend- lesson add, room(edit,add),reservation(make,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
+  - frontend - lessons page, search podle měsíce,týdne, create lesson  29.10 2h
+  - 
+  - 
+  - NEDODĚLÁNO:frontend-  room(edit,add),reservation(make,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
 
 ### LISTOPAD:
   - 

@@ -36,6 +36,8 @@ const Lessons = () => {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchLessons = async () => {
@@ -50,9 +52,37 @@ const Lessons = () => {
     fetchLessons();
   }, []);
 
-  const filteredLessons = lessons.filter((lesson) =>
-    lesson.attributes.Name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedMonth(parseInt(e.target.value));
+    setSelectedWeek(null);  // Reset week when month changes
+  };
+
+  const handleWeekChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedWeek(parseInt(e.target.value));
+  };
+
+  const filteredLessons = lessons.filter((lesson) => {
+    const lessonDate = new Date(lesson.attributes.Start);
+
+    // Filter by search query
+    const matchesSearch = lesson.attributes.Name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    // Filter by selected month
+    const matchesMonth = selectedMonth ? lessonDate.getMonth() === selectedMonth : true;
+
+    // Filter by selected week
+    const matchesWeek = selectedWeek
+      ? Math.ceil(lessonDate.getDate() / 7) === selectedWeek
+      : true;
+
+    return matchesSearch && matchesMonth && matchesWeek;
+  });
+
+  const sortedLessons = [...filteredLessons].sort((a, b) => {
+    const dateA = new Date(a.attributes.Start);
+    const dateB = new Date(b.attributes.Start);
+    return dateA.getTime() - dateB.getTime();
+  });
 
   return (
     <div>
@@ -69,10 +99,33 @@ const Lessons = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className={styles.searchInput}
         />
+        <div className={styles.selectContainer}>
+    <select onChange={handleMonthChange} className={styles.selectInput}>
+        <option value="">Select Month</option>
+        {[...Array(12).keys()].map((month) => (
+            <option key={month} value={month}>
+                {new Date(0, month).toLocaleString('en', { month: 'long' })}
+            </option>
+        ))}
+    </select>
+
+    <select onChange={handleWeekChange} className={styles.selectInput}>
+        <option value="">Select Week</option>
+        {[1, 2, 3, 4, 5].map((week) => (
+            <option key={week} value={week}>
+                Week {week}
+            </option>
+        ))}
+    </select>
+    {/* Create Lesson Button */}
+  <Link href="/create-lesson">
+    <button className={styles.createButton}>Create Lesson</button>
+  </Link>
+</div>
 
         <div className={styles.list}>
-          {filteredLessons.length > 0 ? (
-            filteredLessons.map((lesson) => (
+          {sortedLessons.length > 0 ? (
+            sortedLessons.map((lesson) => (
               <div key={lesson.id} className={styles.card}>
                 <div className={styles.details}>
                   <span className={styles.name}>{lesson.attributes.Name}</span>
@@ -84,10 +137,10 @@ const Lessons = () => {
                     {lesson.attributes.trainer.data.attributes.name} {lesson.attributes.trainer.data.attributes.surname}
                   </span>
                   <span>{lesson.attributes.room.data.attributes.Name}</span>
-                    <span>{lesson.attributes.room.data.attributes.Capacity}</span>
-                    <Link href={`/lesson/${lesson.id}`} passHref>
-                  <button className={styles.detailsButton}>Details</button>
-                </Link>  
+                  <span>{lesson.attributes.room.data.attributes.Capacity}</span>
+                  <Link href={`/lesson/${lesson.id}`} passHref>
+                    <button className={styles.detailsButton}>Details</button>
+                  </Link>  
                 </div>
               </div>
             ))
