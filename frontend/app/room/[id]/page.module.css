@@ -1,0 +1,94 @@
+/* Container for the entire page */
+.container {
+    flex: 1;
+    padding: 40px;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #80ed6d, #2193b0);
+  }
+  
+  /* Heading for the form page */
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  .heading:hover {
+    color: #555;
+  }
+  
+  /* Form container styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.35);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form group wrapper for spacing */
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  /* Label styling */
+  .label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Input and textarea styling */
+  .input,
+  .textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+  }
+  
+  .input:focus,
+  .textarea:focus {
+    border-color: #00796b;
+    outline: none;
+  }
+  
+  /* Textarea resize limitation */
+  .textarea {
+    resize: vertical;
+  }
+  
+  /* Submit button styling */
+  .submitButton {
+    padding: 10px 15px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .submitButton:hover {
+    background-color: #005b52;
+  }
+  
+  /* Error message styling */
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  

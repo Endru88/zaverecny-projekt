@@ -38,9 +38,9 @@
   - frontend - calender fix, admin user=edit client+extra info change, client= edit profile 19.10 4h
   - frontend - lessons page, edit lesson, details lesson, admin show  28.10 2h
   - frontend - lessons page, search podle měsíce,týdne, create lesson  29.10 2h
+  - frontend - room page, edit, create room   30.10. 1h
   - 
-  - 
-  - NEDODĚLÁNO:frontend-  room(edit,add),reservation(make,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
+  - NEDODĚLÁNO:frontend-lesson(delete + confirm), room(delete + confirm),reservation(make, delete,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
 
 ### LISTOPAD:
   - 

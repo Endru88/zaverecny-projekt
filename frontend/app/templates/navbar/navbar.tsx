@@ -41,8 +41,9 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className={`${styles.menu} ${mobileMenuOpen ? styles.mobile : ''}`}>
         <a href="/team">Our Team</a>
-        {userRole === 'admin' && <a href="/osoby">Osoby</a>} {/* Show link if user is admin */}
+        {userRole === 'admin' && <a href="/osoby">People</a>} {/* Show link if user is admin */}
         {userRole === 'admin' && <a href="/lesson">Lessons</a>} {/* Show link if user is admin */}
+        {userRole === 'admin' && <a href="/room">Rooms</a>} {/* Show link if user is admin */}
         {userName ? (
           <>
             <span className={styles.userName}>{userName}</span>
