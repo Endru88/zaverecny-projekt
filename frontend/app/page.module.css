@@ -189,17 +189,21 @@
 }
 
 .modalContent {
-  background-color: #ffffff;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.713); /* Gradient background for modal content */
   color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  transition: transform 0.3s;
-  transform: translateY(-10px); /* Slight lift animation */
+  padding: 25px;
+  margin: 15% auto;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 80%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly bolder shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transform: translateY(-10px); /* Subtle lift */
+}
+
+.modalContent:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
 }
 
 .close {
@@ -233,3 +237,58 @@
     width: 90%; /* Full width for modal on small screens */
   }
 }
+.progressContainer {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space between label and progress bar */
+}
+
+.progressBar {
+  background: linear-gradient(90deg, #2193b0, #80ed6d); /* Background color for the unfilled part */
+  border-radius: 5px;
+  height: 30px; /* Adjust height as needed */
+  width: 100%; /* Make it take full width */
+  overflow: hidden; /* Ensure content stays within bounds */
+  margin: 0 10px; /* Space around the bar */
+}
+
+.progressFill {
+  background: #2a6355; /* Color for the filled part */
+  height: 100%; /* Fill the full height of the bar */
+  transition: width 0.3s ease-in-out; /* Smooth width transition */
+}
+
+.progressText {
+  color: #000; /* Text color */
+  font-weight: bold; /* Make text bold */
+  display: flex; /* Use flexbox to center text */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  height: 100%; /* Full height of the progress bar */
+  position: absolute; /* Position text inside the progress bar */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  
+}
+
+.addButton {
+  display: inline-block;
+  padding: 12px; /* Slightly larger padding */
+  background-color: #2a6355; /* Blue background */
+  color: #ffffff; /* White text */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  width: 48%; /* Full width button */
+  margin-top: 30px;
+}
+
+.addButton:hover
+ {
+  background-color: #1d4138; /* Darker blue on hover */
+}
+
+

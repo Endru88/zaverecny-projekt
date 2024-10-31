@@ -8,6 +8,7 @@ import Footer from './templates/footer/footer'; // Reuse Footer component
 const Calendar = ({ lessons, onLessonClick }) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const timeSlots = Array.from({ length: 15 }, (_, i) => `${i + 8}:00`); // 8:00 to 22:00
+  
 
   return (
     <div className={styles.calendar}>
@@ -30,8 +31,8 @@ const Calendar = ({ lessons, onLessonClick }) => {
               if (lessonDay !== day) return false;
 
               // Calculate start and end hour indices
-              const startHour = start.getHours ()-1;
-              const endHour = end.getHours()-1;
+              const startHour = start.getHours() - 1;
+              const endHour = end.getHours() - 1;
 
               // Check if lesson overlaps with the current time slot
               return (
@@ -68,37 +69,41 @@ const HomePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [person, setPerson] = useState(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  
 
   useEffect(() => {
+    const role = localStorage.getItem('userRole');
+    setUserRole(role);
     const fetchLessonsAndReservations = async () => {
       try {
         const lessonResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons?populate=trainer&populate=room`);
         const lessonData = await lessonResponse.json();
         let lessons = lessonData.data || [];
-    
+
         const startOfWeek = new Date();
         startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
         startOfWeek.setHours(0, 0, 0, 0);
-    
+
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(endOfWeek.getDate() + 6);
         endOfWeek.setHours(23, 59, 59, 999);
-    
+
         lessons = lessons.filter((lesson) => {
           const lessonStart = new Date(lesson.attributes.Start);
           return lessonStart >= startOfWeek && lessonStart <= endOfWeek;
         });
-    
+
         const reservationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reservations?populate=lesson`);
         const reservationData = await reservationResponse.json();
         const reservations = reservationData.data || [];
-    
+
         const reservationCounts = {};
         reservations.forEach((reservation) => {
           const lessonId = reservation.attributes.lesson.data.id;
           reservationCounts[lessonId] = (reservationCounts[lessonId] || 0) + 1;
         });
-    
+
         setLessons(lessons);
         setReservations(reservationCounts);
       } catch (error) {
@@ -107,10 +112,11 @@ const HomePage = () => {
         setReservations({});
       }
     };
-
+    
     const fetchUserData = async () => {
       const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('jwt');
+      
 
       if (userId && token) {
         try {
@@ -133,7 +139,7 @@ const HomePage = () => {
             status: personData.data[0]?.attributes.status || 'N/A', // Add status
             type: personData.data[0]?.attributes.type || 'N/A' // Add type
           };
-          
+
           setUser(userData);
           setIsLoggedIn(!!token);
         } catch (error) {
@@ -164,56 +170,83 @@ const HomePage = () => {
         </div>
 
         <div className={styles.sidebar}>
-        {isLoggedIn ? (
-  <div className={styles.userInfo}>
-    <h2 className={styles.userName}>
-      {person ? person.attributes.name : 'Loading...'} {person ? person.attributes.surname : ''}
-    </h2>
-    {person ? (
-      <>
-        <p className={styles.userDetails}><strong>Telephone:</strong> {user.telephone}</p>
-        <p className={styles.userDetails}><strong>Email:</strong> {user.email}</p>
-        <p className={styles.userDetails}><strong>Address:</strong> {user.address}</p>
-        <p className={styles.userDetails}><strong>Postal Code:</strong> {user.postal}</p>
-        <p className={styles.userDetails}><strong>Date of Birth:</strong> {user.dateofbirth}</p>
-        <p className={styles.userDetails}><strong>Status:</strong> {user.status}</p> {/* Display status */}
-        <p className={styles.userDetails}><strong>Type:</strong> {user.type}</p> {/* Display type */}
-        <Link href={`/osoby/${person.id}/edit`}>
-          <button className={styles.editButton}>Edit Information</button>
-        </Link>
-      </>
-    ) : (
-      <p>Loading person data...</p>
-    )}
-  </div>
-) : (
-  <div className={styles.loginPrompt}>
-    <p>To see your personal data, please log in.</p>
-    <button className={styles.loginButton}>Log In</button>
-  </div>
-)}
+          {isLoggedIn ? (
+            <div className={styles.userInfo}>
+              <h2 className={styles.userName}>
+                {person ? person.attributes.name : 'Loading...'} {person ? person.attributes.surname : ''}
+              </h2>
+              {person ? (
+                <>
+                  <p className={styles.userDetails}><strong>Telephone:</strong> {user.telephone}</p>
+                  <p className={styles.userDetails}><strong>Email:</strong> {user.email}</p>
+                  <p className={styles.userDetails}><strong>Address:</strong> {user.address}</p>
+                  <p className={styles.userDetails}><strong>Postal Code:</strong> {user.postal}</p>
+                  <p className={styles.userDetails}><strong>Date of Birth:</strong> {user.dateofbirth}</p>
+                  <p className={styles.userDetails}><strong>Status:</strong> {user.status}</p> {/* Display status */}
+                  <p className={styles.userDetails}><strong>Type:</strong> {user.type}</p> {/* Display type */}
+                  <Link href={`/osoby/${person.id}/edit`}>
+                    <button className={styles.editButton}>Edit Information</button>
+                  </Link>
+                </>
+              ) : (
+                <p>Loading person data...</p>
+              )}
+            </div>
+          ) : (
+            <div className={styles.loginPrompt}>
+              <p>To see your personal data, please log in.</p>
+              <button className={styles.loginButton}>Log In</button>
+            </div>
+          )}
         </div>
 
         {selectedLesson && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.close} onClick={closeModal}>&times;</span>
-              <h2>{selectedLesson.attributes.Name}</h2>
-              <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
-              <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
-              <p><strong>Trainer:</strong> {selectedLesson.attributes.trainer.data.attributes.name} {selectedLesson.attributes.trainer.data.attributes.surname}</p>
-              {selectedLesson.attributes.room.data ? (
-                <>
-                  <p><strong>Room:</strong> {selectedLesson.attributes.room.data.attributes.Name}</p>
-                  <p><strong>Room Capacity:</strong> {selectedLesson.attributes.room.data.attributes.Capacity}</p>
-                </>
-              ) : (
-                <p><strong>Room:</strong> Not assigned</p>
-              )}
-              <p><strong>Joined:</strong> {reservations[selectedLesson.id] || 0} / {selectedLesson.attributes.room.data ? selectedLesson.attributes.room.data.attributes.Capacity : 'N/A'}</p>
-            </div>
-          </div>
+  <div className={styles.modal}>
+    <div className={styles.modalContent}>
+      <span className={styles.close} onClick={closeModal}>&times;</span>
+      <h2 style={{ fontSize: '2rem', fontWeight: 'bold' }}>{selectedLesson.attributes.Name}</h2>
+      <p><strong>Start:</strong> {new Date(selectedLesson.attributes.Start).toLocaleString()}</p>
+      <p><strong>End:</strong> {new Date(selectedLesson.attributes.End).toLocaleString()}</p>
+      <p><strong>Trainer:</strong> {selectedLesson.attributes.trainer.data.attributes.name} {selectedLesson.attributes.trainer.data.attributes.surname}</p>
+      {selectedLesson.attributes.room.data ? (
+        <>
+          <p><strong>Room:</strong> {selectedLesson.attributes.room.data.attributes.Name}</p>
+          <p><strong>Room Capacity:</strong> {selectedLesson.attributes.room.data.attributes.Capacity}</p>
+        </>
+      ) : (
+        <p><strong>Room:</strong> Not assigned</p>
+      )}
+      <div className={styles.progressContainer}>
+        <span className={styles.progressLabel}>Joined:</span>
+        <div className={styles.progressBar}>
+          <div
+            className={styles.progressFill}
+            style={{
+              width: reservations[selectedLesson.id] > 0 
+                ? `${(reservations[selectedLesson.id] / (selectedLesson.attributes.room.data?.attributes.Capacity || 1)) * 100}%` 
+                : '0%',
+            }}
+          />
+          <span className={styles.progressText}>
+            {reservations[selectedLesson.id] || 0} / {selectedLesson.attributes.room.data?.attributes.Capacity || 'N/A'}
+          </span>
+        </div>
+      </div>
+      <span>
+        <Link href={``}>
+          <button className={styles.addButton}>Add to lesson</button>
+        </Link>
+        { userRole=== 'admin' &&( // Check if user is Admin
+          <Link href={`/lesson-list/`}>
+            <button className={styles.addButton}>Lesson list</button>
+          </Link>
         )}
+      </span>
+    </div>
+  </div>
+)}
+
+
       </div>
       <Footer />
     </div>
