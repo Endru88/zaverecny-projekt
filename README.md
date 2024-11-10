@@ -55,3 +55,9 @@
   - 
   - 
   - 
+
+## BUDOUCÍ ROZVOJ:
+ - platební brána
+ - peněženka (ceny lekci, permanentky podle statusu, podle typu uživatele slevy na lekci)
+ - navázat rezervační systém na interní pokladní a systém pro správu klientu
+ - rozšířit o celkový systém pro všechny provozovny u nás(příjem klientu, naučtování produktů, přiřazení vstupu, implementace klientských karet a čipů)
