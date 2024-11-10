@@ -282,7 +282,7 @@
   border: none; /* Remove default border */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s; /* Smooth transition for background color */
-  width: 48%; /* Full width button */
+  width: 100%; /* Full width button */
   margin-top: 30px;
 }
 

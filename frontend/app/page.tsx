@@ -31,9 +31,9 @@ const Calendar = ({ lessons, onLessonClick }) => {
               if (lessonDay !== day) return false;
 
               // Calculate start and end hour indices
-              const startHour = start.getHours() - 1;
-              const endHour = end.getHours() - 1;
-
+              const startHour = start.getHours()-1;
+              const endHour = end.getHours()-1;
+              console.log(`Lesson: ${lesson.attributes.Name}, Day: ${lessonDay}, Time: ${startHour}-${endHour}`);
               // Check if lesson overlaps with the current time slot
               return (
                 (startHour === parseInt(time) && start.getMinutes() > 0) ||
@@ -236,8 +236,10 @@ const HomePage = () => {
         <Link href={``}>
           <button className={styles.addButton}>Add to lesson</button>
         </Link>
-        { userRole=== 'admin' &&( // Check if user is Admin
-          <Link href={`/lesson-list/`}>
+      </span>
+      <span>
+      { userRole=== 'admin' &&( // Check if user is Admin
+          <Link href={`/lesson-list/${selectedLesson.id}`}>
             <button className={styles.addButton}>Lesson list</button>
           </Link>
         )}

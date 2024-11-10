@@ -1,0 +1,156 @@
+/* Container for the page, with a gradient background */
+.container {
+    padding: 20px;
+    max-width: 100%; /* Full width of the page */
+    margin: 0 auto; /* Center the container */
+    background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
+    font-family: 'Montserrat', sans-serif; /* Font for the entire page */
+  }
+  
+  /* Flex container for the list of reservations */
+  .list {
+    display: flex;
+    flex-direction: column; /* Stack reservations vertically */
+  }
+  
+  /* Card for each reservation, with some padding and slight transparency */
+  .card {
+    display: flex;
+    justify-content: space-between; /* Space between reservation details and button */
+    align-items: center; /* Center vertically */
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.356); /* Slightly transparent background */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space between cards */
+    font-family: 'Montserrat', sans-serif; /* Ensure consistent font */
+    color: #333333; /* Dark text color for readability */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  }
+  
+  /* Container for the details inside each reservation card */
+  .details {
+    display: flex;
+    flex-grow: 1; /* Allow details to take up available space */
+  }
+  
+  /* Styling for each piece of information within a reservation card */
+  .details span {
+    padding: 5px;
+    flex: 1; /* Make each span take equal space */
+    font-size: 1.1em; /* Slightly larger text */
+    color: #000000; /* Darker text for contrast */
+  }
+  
+  /* Name and surname section, larger text and bold */
+  .details .name {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-right: 15px; /* Add some space between name and surname */
+  }
+  
+  
+ 
+  
+  /* Heading for the lesson details page */
+  .heading {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  
+  /* Responsive design for mobile devices */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .heading {
+      font-size: 2rem;
+    }
+  
+    .card {
+      padding: 12px;
+    }
+  
+    .details {
+      flex-direction: column; /* Stack the details vertically on small screens */
+      align-items: flex-start;
+    }
+  
+    .details span {
+      flex: none; /* Don't make them take equal space */
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+  
+    .details .name {
+      font-size: 1.1em;
+      margin-right: 0;
+    }
+  
+    .detailsButton {
+      margin-left: 0;
+      margin-top: 10px;
+      width: 100%; /* Make the button full-width on mobile */
+      font-size: 1.2em;
+    }
+  }
+  .detailsSection {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.342); /* Light background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  
+  /* Individual detail item (e.g., Start, End, Trainer) */
+  .detailItem {
+    font-size: 1.1em; /* Slightly larger text */
+    color: #333; /* Dark gray for text */
+    margin-bottom: 15px; /* Space between items */
+    display: flex; /* Use flexbox to align label and data */
+    flex-direction: row; /* Align label and data horizontally */
+    align-items: center; /* Vertically center the content */
+  }
+  .data {
+    margin-left: 10px; /* Adds space between label and data */
+    color: #000000; /* Slightly lighter color for the data */
+    font-weight: 500; /* Makes the data slightly bolder than normal text */
+    word-wrap: break-word; /* Ensure long words don't break the layout */
+  }
+  
+  /* Strong labels like "Start", "End", "Trainer", "Room" */
+  .detailItem strong {
+    color: #2a6355; /* Blue color for labels */
+    font-weight: 600; /* Slightly bolder label */
+    text-align: right; /* Align the labels to the right */
+  }
+  .detailItem strong {
+    width: 100px; /* Fixed width for the labels to ensure they align */
+    padding-right: 15px; /* Space between label and data */
+  }
+  .subheading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white; /* Or your preferred color */
+  }
+  /* Style for the delete button */
+.deleteButton {
+    background-color: #9b0000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+  
+  /* Change background on hover */
+  .deleteButton:hover {
+    background-color: #c0392b; /* Darker red when hovering */
+  }

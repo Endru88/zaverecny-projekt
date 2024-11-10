@@ -40,18 +40,18 @@
   - frontend - lessons page, search podle měsíce,týdne, create lesson  29.10 2h
   - frontend - room page, edit, create room   30.10. 1h
   - frontend - fix buggu, lesson detail malej restyle 31.10. 2h
-  - NEDODĚLÁNO:frontend-lesson(delete + confirm), room(delete + confirm),reservation(make, delete,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
 
 ### LISTOPAD:
+  - frontend - lesson(delete + confirm),room(delete + confirm), lesson-list + delete reservation(admin) 10.11. 2h
   - 
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - NEDODĚLÁNO:frontend- reservation(make, delete,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
+
 
 ### PROSINEC:
   - 
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 

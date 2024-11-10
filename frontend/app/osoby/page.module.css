@@ -44,14 +44,14 @@
   margin-left: 10px; /* Space between details and button */
   padding: 5px 10px; /* Padding for the button */
   border: none; /* Remove default border */
-  background-color: #007BFF; /* Button color */
+  background-color: #2a6355; /* Button color */
   color: white; /* Text color */
   cursor: pointer; /* Pointer cursor on hover */
   border-radius: 4px; /* Rounded corners */
 }
 
 .detailsButton:hover {
-  background-color: #0056b3; /* Darker color on hover */
+  background-color: #1c4137; /* Darker color on hover */
 }
 
 .heading {
@@ -74,6 +74,6 @@
 }
 
 .searchInput:focus {
-  border-color: #007BFF; /* Blue border on focus */
+  border-color: #2a6355; /* Blue border on focus */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow on focus */
 }
