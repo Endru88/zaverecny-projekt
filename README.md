@@ -43,7 +43,7 @@
 
 ### LISTOPAD:
   - frontend - lesson(delete + confirm),room(delete + confirm), lesson-list + delete reservation(admin) 10.11. 2h
-  - 
+  - frontend,backend - oauth(done, neuklada JWT- musím fixnout) 16.11. 2h
   - 
   - 
   - NEDODĚLÁNO:frontend- reservation(make, delete,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!

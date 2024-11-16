@@ -6,7 +6,7 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       origin: ['http://localhost:3000'], // Your frontend URL here
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
       headers: '*',
     },
   },
