@@ -1,0 +1,223 @@
+[33mcommit a806800f0a17e4d14067254017c74c49c9c70ec5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:31:34 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit 0e05168d0a8e8780800509e2e805155b97cea4f1[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:30:22 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit c969be3ea8646be8a869de1f4c959112c866d6eb[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:28:58 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit 1917bd6a3d06960e5931da96db16f2344dae745d[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:27:18 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit f40290c07252bf28975c6f7511b44d44faf8d027[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:26:48 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit 84f13aa973526f790c4338d89e2b8ab52f4dd6a4[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Nov 16 20:23:38 2024 +0100
+
+    18 - oauth, not storing JWT :(
+
+[33mcommit bb40ae29b3844d5ea91ddc9c83a196b89a8216c3[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sun Nov 10 18:16:03 2024 +0100
+
+     readme
+
+[33mcommit cc34aec698a3be68e5ca9fca6f27cc0508ff29f9[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sun Nov 10 18:11:32 2024 +0100
+
+    17 - lesson(delete + confirm),room(delete + confirm), lesson-list + delete reservation(admin)
+
+[33mcommit cd86a794d6d076f3e87b659617b1486956a36927[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Thu Oct 31 13:25:57 2024 +0100
+
+    16 - fix bugs, lesson details small upgrade
+
+[33mcommit 4a2e07736d7a886f5eeb5e099d9ddf7e29480590[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Thu Oct 31 13:24:13 2024 +0100
+
+    16 - fix bugs, lesson details small upgrade
+
+[33mcommit a32722384011ab6c54dfef7ad488237b3ab677d0[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Wed Oct 30 15:35:20 2024 +0100
+
+    15 - room add, edit, list
+
+[33mcommit 22c706b0c5c8ca0ea1b6101c18adbc54660349c0[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Tue Oct 29 11:07:59 2024 +0100
+
+    14 - lesson add, filter
+
+[33mcommit 164c352ba5b0c37ef350483a95a9a38ef7fe37ff[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Mon Oct 28 10:23:59 2024 +0100
+
+    13 - lessons list, edit, admin role use
+
+[33mcommit 4a5cb3bdd9a5d5cbfe1df9137175a89daef0affe[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Mon Oct 28 10:20:10 2024 +0100
+
+    13 - lessons list, edit, admin role use
+
+[33mcommit be7bbf2c6357271094d14d06a18ac7c87a45e397[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Oct 19 19:25:28 2024 +0200
+
+    11 - fix calendar
+
+[33mcommit c1116a6e6124bbd868703aad9710f6a3e1e66167[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Oct 19 18:57:35 2024 +0200
+
+    12 - adding admin role to user, display more content, be able to change more personal data, client- able to change personal data,
+
+[33mcommit e984aff4a5dcc336c8733a6cba1529f9cea4dda8[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Oct 19 11:54:19 2024 +0200
+
+    11 - fix calendar
+
+[33mcommit 9df247524a080843139845d653c5c05aef8cdcb9[m
+Merge: b1056d0 d202b7d
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Oct 19 11:52:37 2024 +0200
+
+    11 - fix calendar
+
+[33mcommit b1056d0e607eb4d00fe79cf56f94aeb8dd00c841[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sat Oct 19 11:50:26 2024 +0200
+
+    11 - fix calendar
+
+[33mcommit d202b7daf539830d5847e4db6879e1a074fc71c2[m
+Author: _.Endru_not_Found._ <95177886+Endru88@users.noreply.github.com>
+Date:   Wed Oct 16 19:28:01 2024 +0200
+
+    Update README.md
+
+[33mcommit 19782dfe45096b5387561fb0ceaa322222f4d973[m
+Author: _.Endru_not_Found._ <95177886+Endru88@users.noreply.github.com>
+Date:   Wed Oct 16 18:57:35 2024 +0200
+
+    Update README.md
+
+[33mcommit 2ec0b735d9d6a7c47dfb8f4a2ee638d22e5508a8[m
+Author: _.Endru_not_Found._ <95177886+Endru88@users.noreply.github.com>
+Date:   Wed Oct 16 18:57:00 2024 +0200
+
+    Update README.md
+
+[33mcommit c39483c26377e6623273d65db695abe90c1cc2de[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Wed Oct 16 18:26:46 2024 +0200
+
+    10 - fixing bugs
+
+[33mcommit 662ba8ee850f26533045d52cbbd9e8ce164fc4db[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Tue Oct 8 18:21:26 2024 +0200
+
+    09 - user details, restyling
+
+[33mcommit dcbb09ed9540b68c24ef5ff484bd5c32d89abf83[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Mon Sep 30 18:42:27 2024 +0200
+
+    readme
+
+[33mcommit 3f9a3ad471f2e4e935bf472525397e4b3c3be9ca[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Mon Sep 30 18:40:20 2024 +0200
+
+    08 - adding user to person or create new one
+
+[33mcommit 6df4f035d831546ab8c3dcf8e94e82e536cc77c3[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Wed Sep 25 17:41:25 2024 +0200
+
+    07 - login, register
+
+[33mcommit 4d747018fb30be51f00d5f45332a195cf7cf109f[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Wed Sep 25 17:40:51 2024 +0200
+
+    07 - login, register
+
+[33mcommit 0ca5293b2b0d0a16ec4748e99f458956a511ba60[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Sun Sep 22 13:03:40 2024 +0200
+
+    06 - people details, edit
+
+[33mcommit 9642452ef7f73e6136969b4ed2457769afbc2c7f[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 20 16:08:54 2024 +0200
+
+    05- models
+
+[33mcommit 1bf4dc712b744fbe57a413b3cb2ccdc99d2ff966[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 20 13:14:05 2024 +0200
+
+    04 - calender, basic styling
+
+[33mcommit f354bf072595feb3bc13b40f0f5e5634c4efd40e[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 13 18:14:33 2024 +0200
+
+    03 - readme update
+
+[33mcommit a1e01ac17aea77f7f8f6879a30ae31e4ba149206[m
+Merge: e0c91ea 1ce8333
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 13 18:13:03 2024 +0200
+
+    02 - readme update
+
+[33mcommit e0c91ea7f048cf9d5aae04f913dc1cea63512304[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 13 18:11:40 2024 +0200
+
+    02 - readme update
+
+[33mcommit 1ce83333bbd4a9e0fb4bdb244487692cb3c67310[m
+Author: _.Endru_not_Found._ <95177886+Endru88@users.noreply.github.com>
+Date:   Fri Sep 13 18:10:00 2024 +0200
+
+    Update README.md
+
+[33mcommit 2e285dd10a34441998296ec7bb8694d7c10cab13[m
+Author: _.Endru_not_Found._ <95177886+Endru88@users.noreply.github.com>
+Date:   Fri Sep 13 18:08:13 2024 +0200
+
+    Update README.md
+
+[33mcommit 6ab20f6629c7f8a76989d4fc5e1ac5ba9616fcf3[m
+Author: Endru88 <ondrejnemcik@seznam.cz>
+Date:   Fri Sep 13 18:05:06 2024 +0200
+
+    01 - base app, frontend, backend, some data
