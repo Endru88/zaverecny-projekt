@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import styles from './page.module.css';  // Make sure to import the CSS
 
 const OAuthCallback = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const OAuthCallback = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const oauthToken = params.get('id_token'); // Capture the OAuth token from the URL (or 'access_token')
+    const oauthToken = params.get('id_token'); // Capture the OAuth token from the URL
 
     if (!oauthToken) {
       setError('Missing ID Token');
@@ -20,7 +21,7 @@ const OAuthCallback = () => {
 
     try {
       // Decode the JWT token to get user data
-      const decoded = JSON.parse(atob(oauthToken.split('.')[1]));
+      const decoded = JSON.parse(atob(oauthToken.split('.')[1])); // Decode the token and parse the payload
       const userEmail = decoded.email; // Assuming the token contains the email
 
       if (!userEmail) {
@@ -29,67 +30,31 @@ const OAuthCallback = () => {
         return;
       }
 
-      // Store the OAuth token in localStorage as 'jwt'
-      localStorage.setItem('jwt', oauthToken);
-
-      // Now that we have the token, check if it's expired
-      if (isTokenExpired(oauthToken)) {
-        // If expired, refresh the token or handle accordingly
-        handleTokenExpiration();
-        return;
-      }
-
-      // Continue with your normal logic after verifying the token
-      fetch('http://localhost:1337/api/users?populate=person')
+      // Step 1: Check if the user exists by email
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users?filters[email]=${userEmail}`)
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`Failed to fetch users, Status: ${response.status}`);
+            throw new Error(`Failed to fetch user data, Status: ${response.status}`);
           }
           return response.json();
         })
         .then((data) => {
-          const userExists = data.some((user: any) => user.email === userEmail);
-
-          if (userExists) {
-            // Fetch person data to check if the user is associated with a person
-            fetch('http://localhost:1337/api/people?populate=users_permissions_user')  // Correct API endpoint
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error(`Failed to fetch people data, Status: ${response.status}`);
-                }
-                return response.json();
-              })
-              .then((personData) => {
-                // Check if the person data is available and contains the expected structure
-                const personAssociated = personData.data && personData.data.some((person: any) => {
-                  const userPermission = person.attributes.users_permissions_user;
-                  // Ensure that users_permissions_user exists and has the correct email
-                  return userPermission && userPermission.data && userPermission.data.attributes.email === userEmail;
-                });
-
-                if (personAssociated) {
-                  router.push('/');  // User is associated with a person, go to the home page
-                } else {
-                  router.push('/create-person'); // User isn't associated, go to the create-person page
-                }
-                setLoading(false);
-              })
-              .catch((err) => {
-                setError(`Error fetching person data: ${err.message}`);
-                console.error('Error fetching person data:', err);
-                setLoading(false);
-              });
+          // If the user exists
+          if (data && data.length > 0) {
+            console.log('User found:', data[0]);
+            // Step 2: Login the existing user by calling /api/auth/local
+            loginUser(data[0].email, data[0].id);
           } else {
-            setError('User not found');
-            setLoading(false);
+            // If the user does not exist, create the user
+            createUser(userEmail);
           }
+          setLoading(false); // End the loading state
         })
         .catch((err) => {
-          setError(`Error fetching users: ${err.message}`);
-          console.error('Error fetching users:', err);
+          setError(`Error fetching user data: ${err.message}`);
+          console.error('Error fetching user data:', err);
           setLoading(false);
         });
-
     } catch (err) {
       setError('Failed to decode ID Token');
       console.error('Error decoding token', err);
@@ -97,33 +62,138 @@ const OAuthCallback = () => {
     }
   }, [router]);
 
-  // Function to check if the JWT token is expired
-  const isTokenExpired = (token: string): boolean => {
-    const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
-    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    return decodedToken.exp < currentTime; // Return true if token is expired
+  const createUser = (userEmail: string) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+  
+    // Attempt to create a new user via Strapi's local registration endpoint
+    fetch(`${apiUrl}/api/auth/local/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: userEmail,           // Provide the email
+        password: 'randompassword', // Provide a temporary password
+        username: userEmail.split('@')[0], // Optionally, use part of the email as the username
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          // Try to capture more error details
+          return response.json().then((errorData) => {
+            throw new Error(`Failed to create user. Error: ${errorData.message || 'Unknown error'}`);
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('User created:', data);
+  
+        // Store the JWT and user ID after creation
+        localStorage.setItem('jwt', data.jwt);
+        localStorage.setItem('userId', data.user.id);
+        localStorage.setItem('username', data.user.username);
+  
+        // Redirect to home or dashboard
+        router.push('/');
+      })
+      .catch((err) => {
+        // Log the full error response
+        setError(`Error creating user: ${err.message}`);
+        console.error('Error creating user:', err);
+        setLoading(false);
+      });
   };
 
-  // Function to handle token expiration
-  const handleTokenExpiration = () => {
-    // Handle expired token: either refresh or ask the user to log in again
-    console.log('Token expired, prompting re-authentication');
-    // Optionally, redirect the user to the login page
-    router.push('/login'); // Redirect to login if the token is expired
+  const loginUser = (userEmail: string, userId: string) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+
+    // Attempt to login the existing user
+    fetch(`${apiUrl}/api/auth/local`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        identifier: userEmail, // Email or username
+        password: 'randompassword', // You need to have a valid password or get it from somewhere
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(`Failed to login user. Error: ${errorData.message || 'Unknown error'}`);
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('User logged in:', data);
+
+        // Store the JWT and user ID after login
+        localStorage.setItem('jwt', data.jwt);
+        localStorage.setItem('userId', data.user.id);
+        localStorage.setItem('username', data.user.username);
+
+        // Step 3: Check if the person exists in the /api/people endpoint
+        checkIfPersonExists(data.user.id);
+      })
+      .catch((err) => {
+        setError(`Error logging in user: ${err.message}`);
+        console.error('Error logging in user:', err);
+        setLoading(false);
+      });
   };
 
-  // Show loading state while the OAuth logic is being executed
+  const checkIfPersonExists = (userId: string) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+  
+    // Directly search for a person by the userId
+    fetch(`${apiUrl}/api/people?filters[users_permissions_user][id][$eq]=${userId}&populate=users_permissions_user`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Log the response data for debugging purposes
+        console.log('Filtered People API response data:', data);
+  
+        if (data.data && data.data.length > 0) {
+          // If a person is found that matches the userId, proceed
+          console.log('User is associated with a person:', data.data[0]);
+          router.push('/');
+        } else {
+          // If the user is not associated with a person, redirect to create-person page
+          console.log('User is not associated with any person. Redirecting to create-person');
+          router.push('/create-person');
+        }
+      })
+      .catch((err) => {
+        setError(`Error checking person association: ${err.message}`);
+        console.error('Error checking person association:', err);
+        setLoading(false);
+      });
+  };
+  
+  
+  
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.spinner}></div>
+        <div className={styles.loadingText}>Loading...</div>
+      </div>
+    );
   }
 
-  // Show error message if something goes wrong
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  // If everything is successful, you can choose to redirect or show a success message
-  return null;  // You can customize this if you want to show a success message or do something else
+  return (
+    <div className={styles.container}>
+      <div className={styles.spinner}></div>
+      <div className={styles.loadingText}>Loading...</div>
+    </div>
+  );
 };
 
 export default OAuthCallback;

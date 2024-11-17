@@ -53,7 +53,7 @@
 }
 
 .button {
-  background-color: #2193b0; /* Blue background */
+  background-color: #2a6355; /* Blue background */
   color: white; /* White text */
   padding: 12px;
   border: none;
@@ -79,10 +79,71 @@
 }
 
 .link {
-  color: #2193b0; /* Link color */
+  color: #2a6355; /* Link color */
   text-decoration: underline; /* Underline link */
 }
 
 .link:hover {
   text-decoration: none; /* Remove underline on hover */
+}
+.oauthButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.oauthButton:hover {
+  background-color: #2a6355; /* Darker Google Blue on hover */
+}
+
+.oauthButton img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.oauthButton:focus {
+  outline: none;
+}
+
+.oauthButton.google {
+  background-color: #ffffff;
+}
+
+.oauthButton.google:hover {
+  background-color: #2a6355;
+}
+
+.oauthText {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.oauthButton {
+  position: relative;  /* Make sure the button can contain absolutely positioned elements */
+  padding-left: 40px;  /* Add space on the left to accommodate the larger image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a6355;  /* Example background color (Google blue) */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  height: 40px;  /* Button height, no change in size */
+  width: 150px;  /* Fixed button width */
+  text-align: center;
+}
+
+.googleLogo {
+  position: absolute; /* Absolute positioning for the logo */
+  left: 10px;  /* Position image from the left */
+  top: 50%;  /* Center it vertically within the button */
+  transform: translateY(-50%);  /* Adjust to perfect vertical alignment */
+  width: 30px;  /* Make the image 24px wide */
+  height: auto;  /* Maintain aspect ratio (height auto is default) */
 }

@@ -102,20 +102,17 @@ const Login = () => {
 
         <p className={styles.oauthText}>Or login with:</p>
         <div className={styles.oauthButtons}>
-          <button
-            type="button"
-            onClick={() => handleOAuthLogin('google')}
-            className={styles.oauthButton}
-          >
-            Google
-          </button>
-          <button
-            type="button"
-            onClick={() => handleOAuthLogin('github')}
-            className={styles.oauthButton}
-          >
-            GitHub
-          </button>
+        <button
+  type="button"
+  onClick={() => handleOAuthLogin('google')}
+  className={styles.oauthButton}
+>
+  <img src="http://localhost:1337/uploads/small_Google_G_logo_svg_87d661439b.png
+" alt="Google logo" 
+className={styles.googleLogo} />
+  Google
+</button>
+
         </div>
 
         <p className={styles.registerPrompt}>
