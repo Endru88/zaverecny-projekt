@@ -45,8 +45,8 @@
   - frontend - lesson(delete + confirm),room(delete + confirm), lesson-list + delete reservation(admin) 10.11. 2h
   - frontend,backend - oauth(done, neuklada JWT- musím fixnout) 16.11. 3h
   - frontend,backend - oauth(fixed JWT, restyle loader, restyle login page) 17.11. 3h
-  - 
-  - NEDODĚLÁNO:frontend- reservation(make, delete,lesson list +edit),Oauth,time fix, DOCKER !!!!!!!!!!!!
+  - frontend - reservation(make, delete), check pokud je lesson full, není možno se přihlásit, sidebar uživatelsky přihlášené lekce 20.11. 2h
+  - NEDODĚLÁNO:frontend- reservation(lesson list +add),time fix, DOCKER !!!!!!!!!!!!
 
 
 ### PROSINEC:

@@ -129,15 +129,24 @@
   color: #555; /* Tmavě šedý text pro lepší čitelnost */
 }
 
-
+.sidebarContainer {
+  display:  flex ;
+  flex-direction: column; /* Stack sidebars vertically */
+  gap: 20px; /* Add spacing between sidebars */
+  width: 40%; /* Make it responsive */
+}
 /* Sidebar Styles */
 .sidebar {
-  flex: 1; /* Sidebar takes less space */
-  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  gap: 20px; /* Add space between user info and lessons */
   background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
-  border-radius: 10px; /* Rounded corners */
+  padding: 20px;
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%; /* Ensure it spans the correct width */
 }
+
 
 /* User Info and Login Styles */
 .userInfo,
@@ -291,4 +300,55 @@
   background-color: #1d4138; /* Darker blue on hover */
 }
 
+
+.disabledButton {
+  background-color: #d3d3d3; /* Grey color */
+  color: #a9a9a9; /* Light grey text */
+  cursor: not-allowed;
+}
+/* Container for the lessons section */
+.userLessons {
+  margin-top: 20px;
+}
+
+/* Section heading */
+.sectionHeading {
+  font-size: 1.8rem; /* Slightly larger font for the heading */
+  font-weight: bold; /* Bold for emphasis */
+  color: #2a6355; /* Dark greenish color for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+  text-align: center;
+}
+
+/* Style for the list */
+.lessonList {
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+}
+
+/* Style for each individual lesson item */
+.lessonItem {
+  background-color: rgba(255, 255, 255, 0);; /* Light gray background */
+  
+  border-radius: 8px; /* Rounded corners */
+  padding: 1px; /* Padding inside each lesson item */
+  margin-bottom: 1px; /* Space between items */
+  transition: background-color 0.3s, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for lesson items */
+.lessonItem:hover {
+  background-color: #ffffff; /* Light blue background on hover */
+  transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+/* Style for the lesson details (name, time) */
+.lessonItem p {
+  margin: 5px 0; /* Margin between lines */
+  color: #333; /* Dark text for contrast */
+}
+
+.lessonItem p strong {
+  color: #00796b; /* Green color for the labels */
+}
 

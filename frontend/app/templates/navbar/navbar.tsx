@@ -26,7 +26,7 @@ const Navbar = () => {
     // Clear user information from local storage
     localStorage.removeItem('jwt');
     localStorage.removeItem('username');
-    localStorage.removeItem('role'); // Clear user role
+    localStorage.removeItem('userRole'); // Clear user role
     setUserName(null);
     setUserRole(null); // Reset user role in state
     window.location.href = '/login';
