@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import Navbar from './templates/navbar/navbar'; // Reuse Navbar component
 import Footer from './templates/footer/footer'; // Reuse Footer component
 
+
+
 const Calendar = ({ lessons, onLessonClick }) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const timeSlots = Array.from({ length: 15 }, (_, i) => `${i + 8}:00`); // 8:00 to 22:00
@@ -72,7 +74,17 @@ const HomePage = () => {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userLessons, setUserLessons] = useState([]);
   const [userReservationStatus, setUserReservationStatus] = useState(null); // null until checked
+  const [imageLoaded, setImageLoaded] = useState(false);
 
+  
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = '../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg';
+    img.onload = () => setImageLoaded(true);  // Set state once the image is loaded
+  }, []);
+
+  
 
   useEffect(() => {
     const fetchUserLessons = async () => {
@@ -335,7 +347,15 @@ const HomePage = () => {
 
   return (
     <div>
+      <div
+      className={`background ${imageLoaded ? 'loaded' : ''}`}
+      style={{
+        backgroundImage: `url(${imageLoaded ? '../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg' : ''})`,
+      }}
+    ></div>
       <Navbar />
+      
+      <div>
       <div className={styles.container}>
         <div className={styles.calendarContainer}>
           <h1 className={styles.heading}>Weekly Schedule</h1>
@@ -389,7 +409,9 @@ const HomePage = () => {
           ))}
         </ul>
       ) : (
+        <div className={styles.loginPrompt}>
         <p>You are not enrolled in any lessons yet.</p>
+        </div>
       )}
     </div>
   </div>
@@ -463,8 +485,12 @@ const HomePage = () => {
 
       </div>
       <Footer />
+      </div>
+       )} 
     </div>
+    
   );
+  
 };
 
 export default HomePage;

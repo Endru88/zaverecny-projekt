@@ -4,7 +4,10 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh; /* Full height */
-    background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
+    background-image: url('../../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg');
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
     color: white;
     font-family: Arial, sans-serif;
     flex-direction: column; /* Align the spinner and text vertically */

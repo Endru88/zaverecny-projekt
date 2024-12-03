@@ -46,7 +46,9 @@
   - frontend,backend - oauth(done, neuklada JWT- musím fixnout) 16.11. 3h
   - frontend,backend - oauth(fixed JWT, restyle loader, restyle login page) 17.11. 3h
   - frontend - reservation(make, delete), check pokud je lesson full, není možno se přihlásit, sidebar uživatelsky přihlášené lekce 20.11. 2h
-  - NEDODĚLÁNO:frontend- reservation(lesson list +add),time fix, DOCKER !!!!!!!!!!!!
+  - frontend - small restyle 29.11. 3h
+  - frontend- reservation(lesson list +add,manual search, nezobrazovat již přidané),restyle 3.12. 1h
+  - NEDODĚLÁNO: DOCKER !!!!!!!!!!!!
 
 
 ### PROSINEC:
@@ -58,6 +60,7 @@
 
 ## BUDOUCÍ ROZVOJ:
  - platební brána
+ - e-shop(dobijeni kreditu, koupeni permanentek)
  - peněženka (ceny lekci, permanentky podle statusu, podle typu uživatele slevy na lekci)
  - navázat rezervační systém na interní pokladní a systém pro správu klientu
  - rozšířit o celkový systém pro všechny provozovny u nás(příjem klientu, naučtování produktů, přiřazení vstupu, implementace klientských karet a čipů)

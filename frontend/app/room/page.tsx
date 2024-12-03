@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
@@ -18,6 +17,7 @@ interface Room {
 
 const RoomList = () => {
   const [rooms, setRooms] = useState<Room[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
@@ -25,10 +25,13 @@ const RoomList = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
+        setLoading(true); // Show loader during data fetching
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms`);
         setRooms(response.data.data);
       } catch (error: any) {
         setError(`Error fetching rooms: ${error.message}`);
+      } finally {
+        setLoading(false); // Hide loader after fetching data
       }
     };
     fetchRooms();
@@ -63,31 +66,38 @@ const RoomList = () => {
       <div className={styles.container}>
         <h1 className={styles.heading}>Rooms</h1>
         {error && <p className={styles.error}>{error}</p>}
-        
+
         <Link href="/room/create-room" passHref>
           <button className={styles.createButton}>Add Room</button>
         </Link>
 
-        <div className={styles.list}>
-          {rooms.length > 0 ? (
-            rooms.map((room) => (
-              <div key={room.id} className={styles.card}>
-                <div className={styles.details}>
-                  <span className={styles.name}>{room.attributes.Name}</span>
-                  <span>Capacity: {room.attributes.Capacity}</span>
+        {/* Loader */}
+        {loading ? (
+          <div className={styles.spinnerContainer}>
+            <div className={styles.spinner}></div>
+          </div>
+        ) : (
+          <div className={styles.list}>
+            {rooms.length > 0 ? (
+              rooms.map((room) => (
+                <div key={room.id} className={styles.card}>
+                  <div className={styles.details}>
+                    <span className={styles.name}>{room.attributes.Name}</span>
+                    <span>Capacity: {room.attributes.Capacity}</span>
+                  </div>
+                  <Link href={`/room/${room.id}`} passHref>
+                    <button className={styles.detailsButton}>Edit</button>
+                  </Link>
+                  <button className={styles.deleteButton} onClick={() => handleDeleteClick(room)}>
+                    Delete
+                  </button>
                 </div>
-                <Link href={`/room/${room.id}`} passHref>
-                  <button className={styles.detailsButton}>Edit</button>
-                </Link>
-                <button className={styles.deleteButton} onClick={() => handleDeleteClick(room)}>
-                  Delete
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No rooms available.</p>
-          )}
-        </div>
+              ))
+            ) : (
+              <p>No rooms available.</p>
+            )}
+          </div>
+        )}
 
         {/* Confirmation Popup */}
         {showPopup && (

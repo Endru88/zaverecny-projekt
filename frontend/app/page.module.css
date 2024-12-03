@@ -12,7 +12,10 @@
   display: flex;
   flex-direction: row; /* Keep calendar and sidebar side by side */
   align-items: flex-start; /* Align items to the top */
-  background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
+  background-image: url('../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg');
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
 /* Heading */
@@ -37,7 +40,7 @@
   grid-template-rows: repeat(15, 60px); /* 15 řádků pro časové sloty */
   gap: 15px; /* Mezera mezi buňkami */
   padding: 20px; /* Vnitřní okraj pro kalendář */
-  background-color: #ffffff; /* Bílé pozadí pro čistý vzhled */
+  background-color: rgba(255, 255, 255, 0.8); /* Bílé pozadí pro čistý vzhled */
   border-radius: 12px; /* Zaoblené rohy */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Měkčí stín */
 }
@@ -71,8 +74,8 @@
 .timeCell {
   text-align: right;
   padding-right: 15px; /* Vycpání doprava pro čas */
-  background-color: #80ed6d86; /* Světlejší odstín pro časové buňky */
-  color: #6a1b9a; /* Tmavší text pro kontrast */
+  background-color: #2a6355c5; /* Světlejší odstín pro časové buňky */
+  color: #ffffff; /* Tmavší text pro kontrast */
   border-radius: 10px; /* Zaoblené rohy pro buňky času */
 }
 
@@ -89,7 +92,7 @@
 
 /* Pro lekce */
 .hasLesson {
-  background-color: #80ed6d; /* Světle žlutá pro lekce */
+  background-color: #1c700d; /* Světle žlutá pro lekce */
 }
 
 /* Obsah lekce */
@@ -102,8 +105,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #80ed6d; /* Tmavší žlutá pro lekce */
-  color: #333; /* Tmavý text pro kontrast */
+  background-color: #1c700d; /* Tmavší žlutá pro lekce */
+  color: #ffffff; /* Tmavý text pro kontrast */
   font-weight: bold;
   padding: 5px; /* Menší vycpání pro lepší vzhled */
   border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
@@ -111,7 +114,7 @@
 }
 
 .lessonContent:hover {
-  background-color: #68bc5a; /* Tmavší žlutá při přejetí */
+  background-color: #268615; /* Tmavší žlutá při přejetí */
   transform: scale(1.05); /* Mírné zvětšení při přejetí */
 }
 
@@ -140,7 +143,7 @@
   display: flex;
   flex-direction: column; /* Stack children vertically */
   gap: 20px; /* Add space between user info and lessons */
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -153,6 +156,7 @@
 .loginPrompt {
   padding: 20px;
   text-align: center; /* Center text for better layout */
+  color:#000;
 }
 
 .userName {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Navbar from '../templates/navbar/navbar';
@@ -34,6 +34,7 @@ interface Lesson {
 
 const Lessons = () => {
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
@@ -43,11 +44,14 @@ const Lessons = () => {
   useEffect(() => {
     const fetchLessons = async () => {
       try {
+        setLoading(true); // Start loading
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons?populate=trainer&populate=room`);
         setLessons(response.data.data);
       } catch (error: any) {
         console.error('Error fetching lessons:', error.response ? error.response.data : error.message);
         setError(`Error fetching lessons: ${error.response ? error.response.data.message : error.message}`);
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
     fetchLessons();
@@ -138,34 +142,39 @@ const Lessons = () => {
         </div>
 
         <div className={styles.list}>
-          {sortedLessons.length > 0 ? (
-            sortedLessons.map((lesson) => (
-              <div key={lesson.id} className={styles.card}>
-                <div className={styles.details}>
-                  <span className={styles.name}>{lesson.attributes.Name}</span>
-                  <span>
-                    {new Date(lesson.attributes.Start).toLocaleString()} -{' '}
-                    {new Date(lesson.attributes.End).toLocaleString()}
-                  </span>
-                  <span>
-                    {lesson.attributes.trainer.data.attributes.name} {lesson.attributes.trainer.data.attributes.surname}
-                  </span>
-                  <span>{lesson.attributes.room.data.attributes.Name}</span>
-                  <span>{lesson.attributes.room.data.attributes.Capacity}</span>
-                  <Link legacyBehavior href={`/lesson/${lesson.id}`} passHref>
-                    <button className={styles.detailsButton}>Details</button>
-                  </Link>
-                  {/* Delete Button */}
-                  <button className={styles.deleteButton} onClick={() => handleDeleteClick(lesson)}>
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No lessons found.</p>
-          )}
+  {loading ? ( // Show spinner when loading
+    <div className={styles.spinnerContainer}>
+      <div className={styles.spinner}></div>
+    </div>
+  ) : sortedLessons.length > 0 ? (
+    sortedLessons.map((lesson) => (
+      <div key={lesson.id} className={styles.card}>
+        <div className={styles.details}>
+          <span className={styles.name}>{lesson.attributes.Name}</span>
+          <span>
+            {new Date(lesson.attributes.Start).toLocaleString()} -{' '}
+            {new Date(lesson.attributes.End).toLocaleString()}
+          </span>
+          <span>
+            {lesson.attributes.trainer.data.attributes.name} {lesson.attributes.trainer.data.attributes.surname}
+          </span>
+          <span>{lesson.attributes.room.data.attributes.Name}</span>
+          <span>{lesson.attributes.room.data.attributes.Capacity}</span>
+          <Link legacyBehavior href={`/lesson/${lesson.id}`} passHref>
+            <button className={styles.detailsButton}>Details</button>
+          </Link>
+          {/* Delete Button */}
+          <button className={styles.deleteButton} onClick={() => handleDeleteClick(lesson)}>
+            Delete
+          </button>
         </div>
+      </div>
+    ))
+  ) : (
+    <p>No lessons found.</p>
+  )}
+</div>
+
 
         {/* Confirmation Popup */}
         {lessonToDelete && (

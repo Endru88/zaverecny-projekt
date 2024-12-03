@@ -3,8 +3,8 @@
     padding: 20px;
     max-width: 100%; /* Full width of the page */
     margin: 0 auto; /* Center the container */
-    background: linear-gradient(135deg, #80ed6d, #2193b0); /* Gradient background */
-    font-family: 'Montserrat', sans-serif; /* Font for the entire page */
+    min-height: 100vh; /* Full height */
+    background: linear-gradient(135deg, #015c44, #000000); /* Gradient background */    font-family: 'Montserrat', sans-serif; /* Font for the entire page */
   }
   
   /* Flex container for the list of reservations */
@@ -154,3 +154,163 @@
   .deleteButton:hover {
     background-color: #c0392b; /* Darker red when hovering */
   }
+  .searchForm {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #2a6355;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.342); /* Slightly transparent background */
+    width: 100%;
+    max-width: 100%; /* Constrain width for better layout */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.searchForm input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #2a6355;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    color:#000000
+}
+
+/* List of search results */
+.searchResults {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #2a6355;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color:#000000
+}
+
+/* Individual search result */
+.searchItem {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+.searchItem:last-child {
+    border-bottom: none;
+}
+
+.searchItem:hover {
+  background-color: #2a6355; /* Darker green on hover */
+}
+
+/* Selected person display */
+.selectedPerson {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.6); /* Transparent background */
+    border: 1px solid #2a6355;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color:#000000
+    
+}
+
+.selectedPerson p {
+    margin: 0 0 10px;
+    font-weight: bold;
+}
+
+.selectedPerson button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #2a6355;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.selectedPerson button:hover {
+    background-color: #1f483e; /* Darker green on hover */
+}
+
+/* Scrollbar for search results */
+.searchResults::-webkit-scrollbar {
+    width: 8px;
+}
+
+.searchResults::-webkit-scrollbar-thumb {
+    background: #2a6355;
+    border-radius: 4px;
+}
+
+.searchResults::-webkit-scrollbar-thumb:hover {
+    background: #1e4d3b;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .details {
+        flex-direction: column; /* Stack the details vertically on small screens */
+        align-items: flex-start;
+    }
+
+    .details span {
+        flex: none; /* Don't make them take equal space */
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    .details .name {
+        font-size: 1.1em;
+        margin-right: 0;
+    }
+
+    .detailsButton {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%; /* Make the button full-width on mobile */
+        font-size: 1.2em;
+    }
+}
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* Adjust to fit your layout */
+}
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #2a6355; /* Blue-green */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; /* Spinner animation */
+  
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

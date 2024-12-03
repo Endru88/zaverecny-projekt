@@ -787,6 +787,29 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiItemItem extends Schema.CollectionType {
+  collectionName: 'items';
+  info: {
+    singularName: 'item';
+    pluralName: 'items';
+    displayName: 'item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    price: Attribute.Integer & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLessonLesson extends Schema.CollectionType {
   collectionName: 'lessons';
   info: {
@@ -1156,6 +1179,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::item.item': ApiItemItem;
       'api::lesson.lesson': ApiLessonLesson;
       'api::person.person': ApiPersonPerson;
       'api::reservation.reservation': ApiReservationReservation;

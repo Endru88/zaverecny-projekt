@@ -8,7 +8,13 @@ const OAuthCallback = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = '../../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg';
+    img.onload = () => setImageLoaded(true);  // Set state once the image is loaded
+  }, []);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const oauthToken = params.get('id_token'); // Capture the OAuth token from the URL
@@ -178,6 +184,12 @@ const OAuthCallback = () => {
   if (loading) {
     return (
       <div className={styles.container}>
+        <div
+      className={`background ${imageLoaded ? 'loaded' : ''}`}
+      style={{
+        backgroundImage: `url(${imageLoaded ? '../../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg' : ''})`,
+      }}
+    ></div>
         <div className={styles.spinner}></div>
         <div className={styles.loadingText}>Loading...</div>
       </div>
@@ -190,6 +202,12 @@ const OAuthCallback = () => {
 
   return (
     <div className={styles.container}>
+      <div
+      className={`background ${imageLoaded ? 'loaded' : ''}`}
+      style={{
+        backgroundImage: `url(${imageLoaded ? '../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg' : ''})`,
+      }}
+    ></div>
       <div className={styles.spinner}></div>
       <div className={styles.loadingText}>Loading...</div>
     </div>

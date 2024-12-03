@@ -1,14 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
+import Navbar from '../templates/navbar/navbar';
+import Footer from '../templates/footer/footer';
 
 const Login = () => {
   const [identifier, setIdentifier] = useState<string>(''); // email or username
   const [password, setPassword] = useState<string>(''); // password
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = '../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg';
+    img.onload = () => setImageLoaded(true);  // Set state once the image is loaded
+  }, []);
 
   // OAuth login handler
   const handleOAuthLogin = (provider: string) => {
@@ -74,7 +83,16 @@ const Login = () => {
   };
 
   return (
+    <div>
+    <Navbar />
     <div className={styles.container}>
+      
+      <div
+      className={`background ${imageLoaded ? 'loaded' : ''}`}
+      style={{
+        backgroundImage: `url(${imageLoaded ? '../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg' : ''})`,
+      }}
+    ></div>
       <h1 className={styles.heading}>Login</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         {error && <p className={styles.error}>{error}</p>}
@@ -119,6 +137,8 @@ className={styles.googleLogo} />
           Don't have an account? <a href="/register" className={styles.link}>Register here</a>
         </p>
       </form>
+    </div>
+    <Footer />
     </div>
   );
 };

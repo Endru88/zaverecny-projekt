@@ -2,18 +2,18 @@
 .container {
     flex: 1;
     padding: 40px;
-    min-height: 20vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #80ed6d, #2193b0);
+    background: linear-gradient(135deg, #015c44, #000000); /* Gradient background */
   }
   
   /* Heading for the form page */
   .heading {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #ffffff;
     font-size: 2.5rem;
     font-weight: 600;
     transition: color 0.3s;
