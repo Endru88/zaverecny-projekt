@@ -486,7 +486,7 @@ const HomePage = () => {
       </div>
       <Footer />
       </div>
-       )} 
+       
     </div>
     
   );

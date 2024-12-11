@@ -1,109 +1,98 @@
+// app/register/page.tsx
+
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import styles from './page.module.css'; // Adjust the path as necessary
 
-const OAuthCallback = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+const Register = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const idToken = params.get('id_token');
+    const img = new Image();
+    img.src = '../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg';
+    img.onload = () => setImageLoaded(true);  // Set state once the image is loaded
+  }, []);
 
-    if (!idToken) {
-      setError('Missing ID Token');
-      setLoading(false);
-      return;
-    }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+
+    const userData = { username, email, password };
 
     try {
-      // Decode the JWT token to get user data
-      const decoded = JSON.parse(atob(idToken.split('.')[1]));
-      const userEmail = decoded.email; // Assuming the token contains the email
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
 
-      if (!userEmail) {
-        setError('Email not found in the token');
-        setLoading(false);
-        return;
+      const data = await res.json();
+
+      if (res.ok) {
+        router.push('/login'); // Redirect to login after successful registration
+      } else {
+        setError(data.error.message);
       }
-
-      // Fetch users from the API to check if the email exists
-      fetch('http://localhost:1337/api/users?populate=person')
-        .then((response) => response.json())
-        .then((data) => {
-          // Check if the email from the token matches any user in the API response
-          const userExists = data.some((user: any) => user.email === userEmail);
-
-          if (userExists) {
-            // If user exists, store in localStorage
-            localStorage.setItem('username', userEmail); // Or any other user info
-            localStorage.setItem('userRole', 'user'); // Default role as user
-            localStorage.setItem('jwt', idToken);
-
-            // Redirect to the main page or dashboard
-            router.push('/');
-          } else {
-            // If user does not exist, create the user using Strapi register endpoint
-            const newUser = {
-              username: userEmail,  // You can adjust the fields as needed
-              email: userEmail,
-              password: 'defaultpassword123', // Temporary password (could be randomized or sent to the user)
-            };
-
-            // Make a POST request to register the new user
-            fetch('http://localhost:1337/api/auth/local/register', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                username: newUser.username,
-                email: newUser.email,
-                password: newUser.password,
-              }),
-            })
-              .then((response) => response.json())
-              .then((createdUser) => {
-                // After user is created, store their data in localStorage
-                localStorage.setItem('username', createdUser.user.email);
-                localStorage.setItem('userRole', 'user');
-                localStorage.setItem('jwt', createdUser.jwt);
-
-                // Redirect to the main page or dashboard
-                router.push('/');
-              })
-              .catch((err) => {
-                setError('Failed to create user');
-                console.error('Error creating user:', err);
-                setLoading(false);
-              });
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          setError('Error fetching users');
-          console.error('Error fetching users:', err);
-          setLoading(false);
-        });
-
     } catch (err) {
-      setError('Failed to decode ID Token');
-      console.error('Error decoding token', err);
-      setLoading(false);
+      setError('Registration failed. Please try again.');
     }
-  }, [router]);
+  };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  return null; // You could also redirect or show a success message
+  return (
+    <div className={styles.container}>
+      <div
+      className={`background ${imageLoaded ? 'loaded' : ''}`}
+      style={{
+        backgroundImage: `url(${imageLoaded ? '../../../backend/public/uploads/pexels_muhammad_khairul_iddin_adnan_267454_808510_1_618a8a6ae7.jpg' : ''})`,
+      }}
+    ></div>
+      <h1 className={styles.heading}>Register</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {error && <p className={styles.error}>{error}</p>}
+        <div className={styles.field}>
+          <label>Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.field}>
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.field}>
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <button type="submit" className={styles.button}>Register</button>
+        <p className={styles.registerPrompt}>
+          Already have an account? <a href="/login" className={styles.link}>Login here</a>
+        </p>
+      </form>
+    </div>
+  );
 };
 
-export default OAuthCallback;
+export default Register;

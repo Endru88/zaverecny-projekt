@@ -47,15 +47,15 @@
   - frontend,backend - oauth(fixed JWT, restyle loader, restyle login page) 17.11. 3h
   - frontend - reservation(make, delete), check pokud je lesson full, není možno se přihlásit, sidebar uživatelsky přihlášené lekce 20.11. 2h
   - frontend - small restyle 29.11. 3h
-  - NEDODĚLÁNO: DOCKER !!!!!!!!!!!!
+  
 
 
 ### PROSINEC:
-  - frontend- reservation(lesson list +add,manual search, nezobrazovat již přidané),restyle 3.12. 1h
+  - frontend- reservation(lesson list +add,manual search, nezobrazovat již přidané),restyle 3.12. 2h
+  - frontend - fix bugu, restyle 11.12. 2h
   - 
   - 
-  - 
-  - 
+  - NEDODĚLÁNO: DOCKER !!!!!!!!!!!!
 
 ## BUDOUCÍ ROZVOJ:
  - platební brána
