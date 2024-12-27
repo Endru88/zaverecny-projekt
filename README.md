@@ -53,8 +53,8 @@
 ### PROSINEC:
   - frontend- reservation(lesson list +add,manual search, nezobrazovat již přidané),restyle 3.12. 2h
   - frontend - fix bugu, restyle 11.12. 2h
-  - 
-  - 
+  - dokumentace - 1/2 17.12. 2h
+  - dokumentace - 1/2 27.12. 3h
   - NEDODĚLÁNO: DOCKER !!!!!!!!!!!!
 
 ## BUDOUCÍ ROZVOJ:
