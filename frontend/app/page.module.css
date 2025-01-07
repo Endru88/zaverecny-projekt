@@ -92,7 +92,7 @@
 
 /* Pro lekce */
 .hasLesson {
-  background-color: #1c700d; /* Světle žlutá pro lekce */
+  background-color: #ffffff00; /* Světle žlutá pro lekce */
 }
 
 /* Obsah lekce */
@@ -306,8 +306,8 @@
 
 
 .disabledButton {
-  background-color: #d3d3d3; /* Grey color */
-  color: #a9a9a9; /* Light grey text */
+  background-color: #2a635539; /* Grey color */
+  color: #ffffff; /* Light grey text */
   cursor: not-allowed;
 }
 /* Container for the lessons section */
@@ -356,3 +356,113 @@
   color: #00796b; /* Green color for the labels */
 }
 
+.trainer1 {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #299716; /* Tmavší žlutá pro lekce */
+  color: #ffffff; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+
+.trainer1:hover {
+  background-color: #41de25; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}
+
+.trainer2 {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7d2410; /* Light Blue */
+  color: #fff;
+  color: #ffffff; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+.trainer2:hover {
+  background-color: #b9371a; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}
+
+.trainer3 {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #09058b; /* Light Green */
+  color: #fff;
+  color: #ffffff; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+.trainer3:hover {
+  background-color: #0f08d0; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}
+
+/* Default style */
+.trainer4 {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c1ba00; /* Light Gray */
+  color: #000;
+  color: #ffffff; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+.trainer4:hover {
+  background-color: #fff700; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}
+/* Default style */
+.trainer5 {
+  position: absolute; /* Absolutní pozicování */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9d0390; /* Light Gray */
+  color: #000;
+  color: #ffffff; /* Tmavý text pro kontrast */
+  font-weight: bold;
+  padding: 5px; /* Menší vycpání pro lepší vzhled */
+  border-radius: 10px; /* Zaoblené rohy pro obsah lekce */
+  transition: background-color 0.3s, transform 0.3s; /* Plynulý přechod */
+}
+.trainer5:hover {
+  background-color: #e303d1; /* Tmavší žlutá při přejetí */
+  transform: scale(1.05); /* Mírné zvětšení při přejetí */
+}

@@ -55,6 +55,7 @@
   - frontend - fix bugu, restyle 11.12. 2h
   - dokumentace - 1/2 17.12. 2h
   - dokumentace - 1/2 27.12. 3h
+  - frontend, dokumentace - úprava barev kalendáře, úprava dokumentace 7.1. 2h 
   - NEDODĚLÁNO: DOCKER !!!!!!!!!!!!
 
 ## BUDOUCÍ ROZVOJ:

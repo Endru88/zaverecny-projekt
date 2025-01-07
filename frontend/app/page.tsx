@@ -48,11 +48,15 @@ const Calendar = ({ lessons, onLessonClick }) => {
               <div key={day} className={`${styles.lessonCell} ${lessonForCell ? styles.hasLesson : ''}`}>
                 {lessonForCell && (
                   <div
-                    className={styles.lessonContent}
-                    onClick={() => onLessonClick(lessonForCell)} // Click handler
-                  >
-                    {lessonForCell.attributes.Name}
-                  </div>
+                  className={`${styles.lessonContent} ${
+                    lessonForCell
+                      ? styles[`trainer${lessonForCell.attributes.trainer.data.attributes.surname.replace(/\s+/g, "")}`]
+                      : styles.defaultTrainer
+                  }`}
+                  onClick={() => onLessonClick(lessonForCell)} // Click handler
+                >
+                  {lessonForCell.attributes.Name}
+                </div>
                 )}
               </div>
             );
