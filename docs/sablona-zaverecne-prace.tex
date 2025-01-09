@@ -220,7 +220,7 @@ openright
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
 	
-	\pagestyle{empty}
+	\pagestyle{plain}
 	\pagenumbering{Roman}
     \pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
 	\setcounter{page}{1}
@@ -306,7 +306,7 @@ openright
 %% Abstrakt v češtině
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\noindent{\Large{\bfseries{Abstrakt}\\}}
-	\noindent Výsledkem projektu je funkční rezervační systém pro rezervaci lekcí. Stránka zahrnuje registraci uživatelů pomocí OAuth přes Google, také standartní přihlášení přes uživatelské jméno a heslo. Po prvním přihlášení je uživatel vyzván doplnit své údaje jako jsou věk, telefonní číslo a adresa místa bydliště. Uživatelé se přihlašují na lekce pomocí kalendáře zobrazujícího aktuální týden. Mohou vidět historii ale i nadcházející lekce a také si aktualizovat své osobní údaje. Primární je však pohled administrátora, který má možnost spravovat veškeré uživatelské údaje, plus možnost vidět extra údaje jako je typ permanentky atd. Dále možnost vytvářet treninky, místnosti popřípadě manuální rezervace klienta na určitou lekci.Všechna tato data jsou pomocí backendu Strapi ukládána do databáze.\\
+	\noindent Výsledkem projektu je funkční rezervační systém pro rezervaci lekcí. Stránka zahrnuje registraci uživatelů pomocí OAuth přes Google, také standardní přihlášení přes uživatelské jméno a heslo. Po prvním přihlášení je uživatel vyzván doplnit své údaje jako jsou věk, telefonní číslo a adresa místa bydliště. Uživatelé se přihlašují na lekce pomocí kalendáře zobrazujícího aktuální týden. Mohou vidět historii, ale i nadcházející lekce a také si aktualizovat své osobní údaje. Primární je však pohled administrátora, který má možnost spravovat veškeré uživatelské údaje, plus možnost vidět extra údaje jako je typ permanentky atd. Dále možnost vytvářet tréninky, místnosti popřípadě manuální rezervace klienta na určitou lekci.Všechna tato data jsou pomocí backendu Strapi ukládána do databáze.\\
 	
 	
 	\vspace{18pt}
@@ -339,11 +339,11 @@ openright
 
 Výběr závěrečného projektu byl pro mě velice náročný. Hledal jsem takový projekt, kde bych si mohl rozšířit obzory a naučit se něco nového. Zároveň uplatnit znalosti webů a webových aplikací.
 
- Dlouho jsme se v práci potýkali s omezenou možností zrychlit rezervaci treninků a tak ulehčit recepčním práci i zdraví. V ten moment jsem se rozhodl právě pro toto téma mého závěrečného projektu.
+ Dlouho jsme se v práci potýkali s omezenou možností zrychlit rezervaci tréninků a tak ulehčit recepčním práci i zdraví. V ten moment jsem se rozhodl právě pro toto téma mého závěrečného projektu.
 
- Mým cílem bylo vytvořit webovou aplikaci se zobrazením lekcí dostupných pro naše klienty. Celkově přehledný a jednoduchý rezervační systém. Aplikace obsahuje přihlášení i registraci pomocí google, popřípadě klasickou možnost přihlášení. Lekce se zobrazují v kalendáři, kde má možnost uživatel si zobrazit detailní informace o danné lekci. Hlavním účelem aplikace je spíše část administrátorská, možnost úpravy profilu klenta, zobrazení příhlášených uživatelů na lekci, úprava a vytváření lekcí, místností. To celé v přehledném jednoduchém responzivním designu.
+ Mým cílem bylo vytvořit webovou aplikaci se zobrazením lekcí dostupných pro naše klienty. Celkově přehledný a jednoduchý rezervační systém. Aplikace obsahuje přihlášení i registraci pomocí Google, popřípadě klasickou možnost přihlášení. Lekce se zobrazují v kalendáři, kde má možnost uživatel si zobrazit detailní informace o dané lekci. Hlavním účelem aplikace je spíše část administrátorská, možnost úpravy profilu klienta, zobrazení příhlášených uživatelů na lekci, úprava a vytváření lekcí, místností. To celé v přehledném jednoduchém responzivním designu.
 
- V dokumentaci budeme postupně řešit postup vytváření celé aplikace až po současnou podobu. Probereme si použité technologie, budoucí cíle a možnosti rozšíření.
+ V dokumentaci budeme řešit postup vytváření celé aplikace až po současnou podobu. Probereme si použité technologie, budoucí cíle a možnosti rozšíření.
 
 %Tipy k psaní úvodu
 %Je povinný, nadpis neměňte, rozsah - max. 1 strana. 
@@ -383,7 +383,7 @@ Každá tabulka reprezentuje specifickou entitu, např. Lekce, Osoby nebo Rezerv
 Návrh databázového modelu dodržuje principy normalizace, čímž se minimalizuje redundance dat a zvyšuje efektivita úložiště.
 Klíčové tabulky obsahují primární klíče, které jsou používány k propojení tabulek prostřednictvím cizích klíčů. 
 
-\subsection{Podpora více relací, Flexibilita a rozšiřitelnost}
+\subsection{Podpora více relací}
 Databázový model využívá 1:N a M:N vztahy, které umožňují propojení různých entit podle potřeb systému (např. jedna lekce může mít více rezervací, jedna osoba může být rezervována na více lekcí).
 
 
@@ -401,10 +401,10 @@ Diagram představuje propojení jednotlivých datových modelů. vzájemné vzta
 \section{Zkušenosti s tvorbou databází}
 \label{sec:zkusenosti}
 
-Prbolematika databázových aplikací pro mě není probblémem. Jelikož tento projekt výchází z~aplikace v Djangu ze třetího ročníku. Dále jsem vycházel ze zkušeností se správou databáze MySQL ve webovém rozhraní phpMyAdmin.
+Problematika databázových aplikací pro mě není problémem. Jelikož tento projekt vychází z~aplikace v Djangu ze třetího ročníku. Dále jsem vycházel ze zkušeností se správou databáze MySQL ve webovém rozhraní phpMyAdmin.
 
 	\chapter{Využité technologie}
-	V projektu HealthSync byly využity následující technologie, které zajišťují funkčnost systému, jeho škálovatelnost, bezpečnost a uživatelskou přívětivost:
+	V projektu HealthSync byly využity následující technologie, které zajišťují funkčnost systému, jeho škálovatelnost, bezpečnost a uživatelskou přívětivost.
 	
 	
 	\section{Frontend: Uživatelské rozhraní} 
@@ -511,9 +511,9 @@ Next.js rozšířil možnosti Reactu o server-side rendering (SSR) a generován�
       }
 \end{lstlisting}
     
-    \subsection{Autentizace a autorizace} 
+    \subsection{Autentizace} 
     Použití JWT (JSON Web Token) pro zabezpečení API.
-    Uživatelé mohou být registrováni a přihlašováni buď přes Google OAuth, nebo pomocí tradičního přihlašovacího mechanismu.
+    Uživatelé mohou být registrováni a přihlašováni buď přes Google OAuth nebo pomocí tradičního přihlašovacího mechanismu.
     Ochrana endpointů podle rolí (administrátor má přístup k širším funkcím než klient).
     \begin{lstlisting}[style=JavaScript, title={Kód}, caption={JWT přístup}] 
      // ukladání jwt tokenu pro přístup k api requestům
@@ -553,7 +553,7 @@ Po přihlášení získávají uživatelé přístup k odpovídajícím funkcím
 \end{figure}
 
 Přihlášení klasickým způsobem bylo řešeno přímo pomocí Strapi, kterému byly předána pouze data od uživatele při registraci. Při přihlášení přes OAuth nastal problém.
-Zde muselo být dořešeno příhlášení přes OAuth, Strapi v základu automaticky nevytvoří uživatele, pouze si vezme jeho data z Googlu. Bylo nutné dořešit fůnkci pro vytvoření uživatele nebo příhlášení uživatele pokud již existuje. Díky tomu bylo dosáhnuto jednoduššího příhlášení/registrace pomocí jednoho tlačítka.
+Zde muselo být dořešeno přihlášení přes OAuth, Strapi v základu automaticky nevytvoří uživatele pouze si vezme jeho data z Googlu. Bylo nutné dořešit funkci pro vytvoření uživatele nebo přihlášení uživatele pokud již existuje. Díky tomu bylo dosáhnuto jednoduššího přihlášení/registrace pomocí jednoho tlačítka.
 
 \begin{lstlisting}[style=JavaScript, title={Kód}, caption={Ukázka řešení oauth loginu}, basicstyle=\footnotesize\ttfamily]
 	useEffect(() => {
@@ -567,7 +567,7 @@ Zde muselo být dořešeno příhlášení přes OAuth, Strapi v základu automa
     }
 
     try {
-      // Decodování JWT tokenu pri přístup k uživatelským datům
+      // Dekodování JWT tokenu při přístup k uživatelským datům
       const decoded = JSON.parse(atob(oauthToken.split('.')[1])); // Dekodování tokenu
       const userEmail = decoded.email; 
 
@@ -577,7 +577,7 @@ Zde muselo být dořešeno příhlášení přes OAuth, Strapi v základu automa
         return;
       }
 
-      // Step 1: Kontrola pokud uživatel existuje podle emailu
+      // Kontrola pokud uživatel existuje podle emailu
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users?filters[email]=${userEmail}`)
         .then((response) => {
           if (!response.ok) {
@@ -589,7 +589,7 @@ Zde muselo být dořešeno příhlášení přes OAuth, Strapi v základu automa
           // pokud existuje
           if (data && data.length > 0) {
             console.log('User found:', data[0]);
-            // Step 2: Zaloguje se za nalezeného uživatele v: /api/auth/local
+            // Step 2: Přihlásí se za nalezeného uživatele v: /api/auth/local
             loginUser(data[0].email, data[0].id);
           } else {
             // Pokud neexistuje, Vytvoří se uživatel.
@@ -610,7 +610,7 @@ Zde muselo být dořešeno příhlášení přes OAuth, Strapi v základu automa
   }, [router]);
 \end{lstlisting}
 \subsection{Hlavní stránka}
-Zde byl vytvořen kalendár lekcí co nejjednodušejí. Kalendář zobrazuje aktualní týden, v nedělní hodinách se automaticky zobrazí týden následující.Každá lekce má detailní stránku, kde jsou uvedeny informace o čase, místnosti, trenérovi a seznamu účastníků. Klienti mohou jedním kliknutím rezervovat místo na lekci. Dále mohou na hlavní stránce sledovat následující rezervované lekce a detail profilu (v budoucnu stav peněženky/permanentky).
+Zde byl vytvořen kalendář lekcí co nejjednodušeji. Kalendář zobrazuje aktuální týden, v nedělních hodinách se automaticky zobrazí týden následující.Každá lekce má detailní stránku kde jsou uvedeny informace o čase, místnosti, trenérovi a seznamu účastníků. Klienti mohou jedním kliknutím rezervovat místo na lekci. Dále mohou na hlavní stránce sledovat následující rezervované lekce a detail profilu (v budoucnu stav peněženky/permanentky).
 
 
 	        \begin{figure}[h]
@@ -645,7 +645,7 @@ Zde byl vytvořen kalendár lekcí co nejjednodušejí. Kalendář zobrazuje akt
               const end = new Date(lesson.attributes.End);
               const lessonDay = start.toLocaleDateString('en-US', { weekday: 'long' });
 
-              // Kontrola jestli lekce patří do danného dne
+              // Kontrola jestli lekce patří do daného dne
               if (lessonDay !== day) return false;
 
               // Kalkulace počátku a konce lekce
@@ -699,22 +699,22 @@ Zde byl vytvořen kalendár lekcí co nejjednodušejí. Kalendář zobrazuje akt
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{image/Snímek obrazovky 2025-01-07 173141.png}
-        \caption{Seznam rezervovací na lekci}
+        \caption{Seznam rezervací na lekci}
         \label{fig:image2}
     \end{minipage}
     \end{figure}
     \clearpage
-        Úpráva dat je ošetřena aby nebylo možno zadávat neplatná data u emailu, tel. čísla ve špatném tvaru, psč. Bylo ošetřeno taktéž překročení maximální kapacity u rezervace lekce.
+        Úprava dat je ošetřena tak, aby nebylo možno zadávat neplatná data u emailu, tel. čísla ve~špatném tvaru, psč. Bylo ošetřeno taktéž překročení maximální kapacity u rezervace lekce.
         \begin{figure}[h!]
             \centering
             \includegraphics[width=1\linewidth]{image/Snímek obrazovky 2025-01-07 174728.png}
-            \caption{Ošetření}
+            \caption{Maximální počet rezervací}
             \label{fig:enter-label}
         \end{figure}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\linewidth]{image/Snímek obrazovky 2025-01-07 175059.png}
-    \caption{Maximální počet rezervací}
+    \caption{Ošetření}
     \label{fig:enter-label}
 \end{figure}
 
@@ -741,9 +741,9 @@ Ačkoli je aplikace v současné podobě plně funkční, existují další mož
 \item Statistiky a reporty: Vytvoření analytických nástrojů pro sledování obsazenosti lekcí a preferencí uživatelů.
 \item Víceúrovňová správa uživatelů: Zavedení dalších rolí, například trenérů, s přístupem pouze k jejich vlastním lekcím.
 \item Eshop: Nákup permanentek dobíjení kreditu atd.
-\item Změna použité technologie na backend (Strapi je naprosto jednoduchý systém pro učení, ale bohužel k nasazení do realného provozu je příliš pomalý a chybí zde pokročilejší funkce pro vývoj backendu.)
+\item Změna použité technologie na backend (Strapi je naprosto jednoduchý systém pro učení, ale bohužel k nasazení do reálného provozu je příliš pomalý a chybí zde pokročilejší funkce pro vývoj backendu.)
 \item Implementace do webových stránek: Posledním krokem by byl redesign celých webových stránek a implementace rezervačního systému
-\item Navázání systému: navázaní na odbavovací systém, později i vytvoření celého interního odbavovacího/pokladního systému navázaného na web a rezervační systém.
+\item Navázání systému: navázání na odbavovací systém, později i vytvoření celého interního odbavovacího/pokladního systému navázaného na web a rezervační systém.
 \end{itemize}
 \subsection{Zhodnocení}
 Projekt přinesl mnoho výzev, ale také příležitostí k rozšíření znalostí a dovedností.
