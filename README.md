@@ -14,7 +14,7 @@
   - CSS modules
   - JWT token
 ### PREZENTACE:
-  - [https://youtube.](https://www.youtube.com/watch?v=pmNB47nbGYc)
+  - [https://youtube.com](https://www.youtube.com/watch?v=pmNB47nbGYc)
 
 ## ZDROJE:
   - Implementace modelů z mého předchozího projektu IT3 (https://github.com/Endru88/healthsync)
